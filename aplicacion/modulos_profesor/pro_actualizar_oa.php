@@ -114,14 +114,6 @@ if (@!$_SESSION['usuario']) {
 
                         <input type="text" style="display:none;" name="id_objeto_aprendizaje" value='<?php echo $id_objeto_aprendizaje ?>' ></input>
 
-                        <div class="form-group" >
-                            <label for="file">Archivo que contine el recurso de aprendizaje:</label>
-                            <p id="error2" style="display:none; color:#FF0000;">
-                                El límite máximo de tamaño de archivo es 10MB.
-                            </p>
-                            <input type="file" class="form-control" id="o_aprendizaje" name="o_aprendizaje" required>
-                        </div>
-
                         <div class="form-group">
                             <label for="nombre">Nombre:</label>
                             <p id="oas_duplicados" style="display:none; color:#FF0000;">
