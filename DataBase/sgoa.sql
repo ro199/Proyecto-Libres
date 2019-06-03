@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.8.0.1
 -- phpMyAdmin SQL Dump
 -- version 4.8.0.1
@@ -295,10 +295,6 @@ CREATE TABLE `objeto_aprendizaje` (
 -- Volcado de datos para la tabla `objeto_aprendizaje`
 --
 
-INSERT INTO `objeto_aprendizaje` (`idobjeto_aprendizaje`, `nombre`, `descripcion`, `id_usuario`, `institucion`, `fechaCreacion`, `palabras_clave`, `tamanio`, `ruta`, `materia`, `descarga`) VALUES
-(12, 'ecotec', 'ecol', 4, 'EPN', '2018-07-24 22:17:50', 'eco', '123391', '../../storage/ecotec.zip', 'GEOQUIMICA', 2),
-(13, 'ControlVersiones', 'Versiones', 4, 'EPN', '2018-07-26 21:17:28', 'git', '254048', '../../storage/ControlVersiones.zip', 'ALGORITMOS', 0),
-(16, 'Metodos', 'Agiles', 4, 'EPN', '2018-07-26 21:49:01', 'metodos agiles', '116845', '../../storage/Metodos.zip', 'INGENIERÍA DE SOFTWARE II', 1);
 
 -- --------------------------------------------------------
 
@@ -344,6 +340,7 @@ CREATE TABLE `usuario` (
   `contrasenia` varchar(45) DEFAULT NULL,
   `tipo_usuario` varchar(3) DEFAULT NULL,
   `activo` varchar(1) DEFAULT NULL,
+  `cambio_de_clave` varchar(1) DEFAULT NULL,
   `foto` varchar(45) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -351,15 +348,15 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `usuario`, `contrasenia`, `tipo_usuario`, `activo`) VALUES
-(1, 'admin', 'admin', 'ADM', 'V'),
+INSERT INTO `usuario` (`idUsuario`, `usuario`, `contrasenia`, `tipo_usuario`, `activo`,`cambio_de_clave`) VALUES
+(1, 'admin', 'admin', 'ADM', 'V', 'F'),
 (2, 'ktapia', 'hola123', 'EST', 'V'),
-(4, 'AlexisMaldonado0', 'alexis', 'PRO', 'V'),
-(5, 'FernandoTapia0', 'bESn9', 'PRO', 'F'),
-(6, 'mmjaramilloarteaga', 'mmjaramilloarteaga', 'EST', 'V'),
-(7, 'mmjaramillo', 'mmjaramillo', 'EST', 'V'),
-(8, 'mmjaramillo', '123', 'EST', 'V'),
-(9, 'MariaIntriago0', 'gcjFI', 'PRO', 'V');
+(4, 'AlexisMaldonado0', 'alexis', 'PRO', 'V', 'F'),
+(5, 'FernandoTapia0', 'bESn9', 'PRO', 'F', 'F'),
+(6, 'mmjaramilloarteaga', 'mmjaramilloarteaga', 'EST', 'V', 'F'),
+(7, 'mmjaramillo', 'mmjaramillo', 'EST', 'V', 'F'),
+(8, 'mmjaramillo', '123', 'EST', 'V', 'F'),
+(9, 'MariaIntriago0', 'gcjFI', 'PRO', 'V', 'F');
 
 -- --------------------------------------------------------
 
