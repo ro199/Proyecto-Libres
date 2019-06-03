@@ -20,7 +20,7 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: 'Porcentaje de Descarga de los Objetos de Aprendizaje'
+            text: 'Porcentaje de Descarga de los Recursos de Aprendizaje'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

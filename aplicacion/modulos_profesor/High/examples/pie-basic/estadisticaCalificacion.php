@@ -20,7 +20,7 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: 'Porcentaje de Calificaciones del Objeto de Aprendizaje'
+            text: 'Porcentaje de Calificaciones del Recurso de Aprendizaje'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

@@ -21,7 +21,7 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: 'Porcentaje de Objetos de Aprendizaje por Materia'
+            text: 'Porcentaje de Recursos de Aprendizaje por Materia'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

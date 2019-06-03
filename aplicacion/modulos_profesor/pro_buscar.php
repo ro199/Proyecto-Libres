@@ -116,7 +116,7 @@ if (@!$_SESSION['usuario']) {
     <div class="row content">
         <!-- --------------------------------------------- -->
         <div class="col-sm-12 text-center">
-            <h2> Administración de objetos de aprendizaje</h2>
+            <h2> Administración de recursos de aprendizaje</h2>
             <form action="../modulos_profesor/pro_ejecutar_buscar.php" method="post" enctype="multipart/form-data">
                 <div class="col-md-3">
                 </div>
@@ -266,9 +266,7 @@ if (@!$_SESSION['usuario']) {
 
     </div>
 </div></br></br></br>
-<footer class="label-default container-fluid text-center">
-    <p class="copyright small">Copyright &copy; Jaime Crespin, Jossué Dután, Alexis Maldonado 2018</p>
-</footer>
+
 </body>
 
 </html>

@@ -97,7 +97,7 @@ if (isset($_GET['mensaje'])) {
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
-                        <li><a data-step="3" data-intro="Puedes Buscar tus objetos de aprendizaje aquí" href="../modulos_profesor/pro_buscar.php">Buscar</a></li>
+                        <li><a data-step="3" data-intro="Puedes Buscar tus Recursos de aprendizaje aquí" href="../modulos_profesor/pro_buscar.php">Buscar</a></li>
                         <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores
                         <span class="caret"></span></a>
@@ -107,7 +107,7 @@ if (isset($_GET['mensaje'])) {
                         <li><a href="../modulos_comunes/modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
                     </ul>
                 </li>
-                <li><a data-step="4" data-intro="Puedes encontrar herramientas útiles para crear tus objetos de aprendizaje aquí" href="../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
+                <li><a data-step="4" data-intro="Puedes encontrar herramientas útiles para crear tus Recursos de aprendizaje aquí" href="../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
                         <li><a href="../modulos_comunes/modulo_foro/index.php">Foro</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -120,31 +120,28 @@ if (isset($_GET['mensaje'])) {
         <div class="container-fluid text-center">    
             <div class="row content">
                 <div class="col-sm-6 col-sm-offset-3"> 
-                    <h2>Objeto de aprendizaje</h2>
+                    <h2>Recurso de aprendizaje</h2>
                     <form id="envio" method="post" enctype="multipart/form-data">
                         <p id="oas_existentes" style="display:none;" ><?php
                             require '../clases_negocio/funciones_oa_profesor.php';
                             require '../clases_negocio/funciones_administrador.php';
                             echo obtener_lista_de_oas();
                             ?></p>
-                        <div class="form-group" data-step="1" data-intro="¡Bienvenido! Ingresa el Objeto de Aprendizaje (.zip) en este campo">
-                            <label for="file">Archivo que contine el objeto de aprendizaje:</label>
-                            <p id="error1" style="display:none; color:#FF0000;">
-                                Formato de archivo ínvalido! Solo se admiten archivos .zip.
-                            </p>
+                        <div class="form-group" data-step="1" data-intro="¡Bienvenido! Ingresa el Recurso de Aprendizaje (.zip) en este campo">
+                            <label for="file">Archivo que contine el recurso de aprendizaje:</label>
                             <p id="error2" style="display:none; color:#FF0000;">
                                 El límite máximo de tamaño de archivo es 10MB.
                             </p>
                             <input type="file" class="form-control" id="o_aprendizaje" name="o_aprendizaje" required>
                         </div>
 
-                        <div class="camposOA" data-step="2" data-intro="Ingresa los datos del Objeto de Aprendizaje en estos campos">
+                        <div class="camposOA" data-step="2" data-intro="Ingresa los datos del Recurso de Aprendizaje en estos campos">
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
                                 <p id="oas_duplicados" style="display:none; color:#FF0000;">
-                                    El nombre de objeto ya ha sido utilizado!
+                                    El nombre del recurso ya ha sido utilizado!
                                 </p>
-                                <input type="text" class="form-control" id="nombre" placeholder="Nombre de objeto de aprendizaje" name="nombre" required autocomplete="off">
+                                <input type="text" class="form-control" id="nombre" placeholder="Nombre del recurso de aprendizaje" name="nombre" required autocomplete="off">
                             </div>
 
 
@@ -184,18 +181,7 @@ if (isset($_GET['mensaje'])) {
                 </div>
             </div>
         </div></br></br></br>
-
-        <footer class="label-default container-fluid text-center">
-            <script type="text/javascript" src="../../intro.js/intro.js"></script>
-            <a class="btn btn-info btn-default" href="javascript:void(0);" onclick="javascript:introJs().setOption('showProgress', true).start();">Ayuda</a>
-            <br/>
-            <p class="copyright small">Copyright &copy; Daniel Crespin, Jossué Dután, Alexis Maldonado 2018</p>
-
-        </footer>
-
-
-
-        <script>
+            <script>
 
             $(function(){
                 $("#envio").on("submit", function(e){
@@ -258,7 +244,7 @@ if (isset($_GET['mensaje'])) {
                      }*/
                 }
             });
-            //funcion validacion objetos
+            //funcion validacion Recursos
             function comprobar_existencia(arreglo, valor) {
                 var flag = false;
                 for (i = 0; i < arreglo.length; i++)
