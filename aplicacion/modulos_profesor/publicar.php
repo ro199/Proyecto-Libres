@@ -1,13 +1,21 @@
 <?php
 session_start();
+require_once '../clases_negocio/clase_conexion.php';
 require '../clases_negocio/funciones_oa_profesor.php';
 
-$id_objeto_aprendizaje = filter_input(INPUT_GET, 'id');
-        //extract($_GET);
-$objeto_de_aprendizaje = obtener_oa_como_arreglo($id_objeto_aprendizaje);
+if (isset($_POST['objeto_id'])) 
+{ 
+// Instructions if $_POST['value'] exist 
+	$id_objeto = $_POST['objeto_id'];
+	echo $id_objeto;
+}
+else echo "ya nada";
 
-$nombre = $objeto_de_aprendizaje['nombre'];
-echo "asdasdasdasdasdasd". $id_objeto_aprendizaje;
+        //extract($_GET);
+//$objeto_de_aprendizaje = obtener_oa_como_arreglo($id_objeto_aprendizaje);
+
+//$nombre = $objeto_de_aprendizaje['nombre'];
+//echo $id_objeto;
 //publicarRA($nombre);
 
 //echo '<script charset="UTF-8">alert("El recurso se ha publicado correctamente")</script> ';

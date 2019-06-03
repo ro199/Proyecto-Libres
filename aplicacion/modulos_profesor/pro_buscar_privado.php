@@ -186,7 +186,7 @@ if (@!$_SESSION['usuario']) {
                         echo '<td>----</td>';
                     }
                     echo "<td><a href=" . $row['ruta'] . "  onclick= \"myFunction('" . $row['idobjeto_aprendizaje'] . "');\" >Descargar</a></td>";
-                    echo "<td><a href=publicar.php >Publicar</a></td>";
+                    echo "<td><a href=publicar.php onclick=\"myFunction2('" . $row['idobjeto_aprendizaje'] . "');\" >Publicar</a></td>";
                 }
 
             }
@@ -206,14 +206,28 @@ if (@!$_SESSION['usuario']) {
                     //$("#tabla").ajax().reload();
                 }, 10000);
 
-                function myFunction(id_objeto)
+                function myFunction($id_objeto)
                 {
 
                     $.ajax({
 
                         url: 'pro_ejecutar_actualizar_descarga.php',
                         type: 'POST',
-                        data: 'objeto_id='+id_objeto,
+                        data: 'objeto_id='+$id_objeto,
+
+                        async : false,
+
+                    });
+
+                }
+                function myFunction2($id_objeto)
+                {
+
+                    $.ajax({
+
+                        url: 'publicar.php',
+                        type: 'POST',
+                        data: 'objeto_id='+$id_objeto,
 
                         async : false,
 
