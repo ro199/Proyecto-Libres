@@ -21,7 +21,7 @@ $id_usuario= $_SESSION['id'];
 $conexion = new Conexion();
 $statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion,id_usuario,institucion,palabras_clave,tamanio,ruta,materia, tipo_repo,descarga) VALUES (?, ?, ?, ?,?,?,?,?,?,?)';
 $consulta = $conexion->prepare($statement);
-if ($consulta->execute(array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 0,0))) {
+if ($consulta->execute(array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 1,0))) {
     $seGuardo_db = 1;
     /*$mail = 'alexis.maldonado@epn.edu.ec';
     $user = 'alexis';

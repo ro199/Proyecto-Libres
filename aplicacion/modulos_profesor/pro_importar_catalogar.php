@@ -8,110 +8,106 @@ if (isset($_GET['mensaje'])) {
     echo '<script type="text/javascript">alert("DEBE CARGAR UN OA PARA SER COLABORADOR");</script>';
 }
 
-    require_once 'High/examples/pie-basic/conexion.php';
-    $sql = "select * from facultad";
-    $result = mysqli_query($conexion, $sql); 
+require_once 'High/examples/pie-basic/conexion.php';
+$sql = "select * from facultad";
+$result = mysqli_query($conexion, $sql); 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
-    <head>
-        <meta charset="utf-8"></meta>
-        <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
-        <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
-        <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script languaje = "javascript">
-            $(document).ready(function(){
-                $("#cbx_carreras").change(function(){
-                    $("#cbx_carreras option:selected").each(function(){
-                            idfacultad = $(this).val();
+<head>
+    <meta charset="utf-8"></meta>
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script languaje = "javascript">
+        $(document).ready(function(){
+            $("#cbx_carreras").change(function(){
+                $("#cbx_carreras option:selected").each(function(){
+                    idfacultad = $(this).val();
 
-                            $.post("getCarreras.php", {idfacultad: idfacultad}, function(data){
-                                $("#cbx_materia").html(data);
-                            });
+                    $.post("getCarreras.php", {idfacultad: idfacultad}, function(data){
+                        $("#cbx_materia").html(data);
                     });
-                })
-            });
-        </script>
+                });
+            })
+        });
+    </script>
 
-        <link href="../../intro.js/introjs.css" rel="stylesheet">
-        <title>Proyecto SGOA</title>
-    </head>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */ 
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
+    <link href="../../intro.js/introjs.css" rel="stylesheet">
+    <title>Proyecto SGOA</title>
+</head>
+<style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
 
-        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 390px}
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 390px}
 
-        /* Set gray background color and 100% height */
+    /* Set gray background color and 100% height */
+    .sidenav {
+        padding-top: 20px;
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    html{
+        min-height: 100%;
+        position: relative;
+    }
+    body{
+        margin:0;
+        margin-bottom: 40px;
+    }
+    /* Set black background color, white text and some padding */
+    footer {
+        background-color: #555;
+        color: white;
+        padding: 15px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
         .sidenav {
-            padding-top: 20px;
-            background-color: #f1f1f1;
-            height: 100%;
-        }
-
-        /* Set black background color, white text and some padding */
-        html{
-            min-height: 100%;
-            position: relative;
-        }
-        body{
-            margin:0;
-            margin-bottom: 40px;
-        }
-        /* Set black background color, white text and some padding */
-        footer {
-            background-color: #555;
-            color: white;
+            height: auto;
             padding: 15px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
         }
-
-        /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
-            .sidenav {
-                height: auto;
-                padding: 15px;
-            }
-            .row.content {height:auto;} 
-        }
-    </style>
+        .row.content {height:auto;} 
+    }
+</style>
 
 
-    <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>                        
-                    </button>
-                    <a class="navbar-brand" href="#">Bienvenid@: <strong><?php echo $_SESSION['usuario'] ?></strong></a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
-                        <li><a data-step="3" data-intro="Puedes Buscar tus Recursos de aprendizaje aquí" href="../modulos_profesor/pro_buscar.php">Buscar</a></li>
-                        <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../modulos_comunes/modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/perfil_colaborador.php">Perfil</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
-                    </ul>
-                </li>
-                <li><a data-step="4" data-intro="Puedes encontrar herramientas útiles para crear tus Recursos de aprendizaje aquí" href="../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Bienvenid@: <strong><?php echo $_SESSION['usuario'] ?></strong></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Repositorios
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="../modulos_profesor/pro_buscar.php">Repositorio público</a></li>
+                                <li><a href="../modulos_profesor/pro_buscar_privado.php">Repositorio privado</a></li>
+                            </ul>
+                        </li>
                         <li><a href="../modulos_comunes/modulo_foro/index.php">Foro</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../../aplicacion/desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+                        <li><a href="../desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
                     </ul>
                 </div>
             </div>
@@ -123,10 +119,10 @@ if (isset($_GET['mensaje'])) {
                     <h2>Recurso de aprendizaje</h2>
                     <form id="envio" method="post" enctype="multipart/form-data">
                         <p id="oas_existentes" style="display:none;" ><?php
-                            require '../clases_negocio/funciones_oa_profesor.php';
-                            require '../clases_negocio/funciones_administrador.php';
-                            echo obtener_lista_de_oas();
-                            ?></p>
+                        require '../clases_negocio/funciones_oa_profesor.php';
+                        require '../clases_negocio/funciones_administrador.php';
+                        echo obtener_lista_de_oas();
+                        ?></p>
                         <div class="form-group" data-step="1" data-intro="¡Bienvenido! Ingresa el Recurso de Aprendizaje (.zip) en este campo">
                             <label for="file">Archivo que contine el recurso de aprendizaje:</label>
                             <p id="error2" style="display:none; color:#FF0000;">
@@ -164,65 +160,65 @@ if (isset($_GET['mensaje'])) {
                                 <option value="0">Selecione una Carrera</option>
                                 <?php 
 
-                                    while($row = mysqli_fetch_array($result)){
-                                ?>
+                                while($row = mysqli_fetch_array($result)){
+                                    ?>
                                     <option value = "<?php echo $row['idfacultad'];?>"> <?php echo $row['facultad'];?></option>
-                                <?php
-                                    }
+                                    <?php
+                                }
                                 ?>
                             </select>
                             <label >Materias:</label>
                             <select class= "form-control" id="cbx_materia" name="cbx_materia" dir="ltr" required>
                             </select>
                             <br/>
-                        <input class="btn-group-sm" type="submit" value="Subir OAs"/>
-                    </form>
+                            <input class="btn-group-sm" type="submit" value="Subir Recurso de Aprendizaje"/>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
-        </div></br></br></br>
+            </div></br></br></br>
             <script>
 
-            $(function(){
-                $("#envio").on("submit", function(e){
-                    e.preventDefault();
-                    var f = $(this);
-                    var formData = new FormData(document.getElementById("envio"));
-                    $.ajax({
-                        url: "pro_ejecutar_insertar_oa.php",
-                        type: "post",
-                        dataType: "html",
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(html){
+                $(function(){
+                    $("#envio").on("submit", function(e){
+                        e.preventDefault();
+                        var f = $(this);
+                        var formData = new FormData(document.getElementById("envio"));
+                        $.ajax({
+                            url: "pro_ejecutar_insertar_oa.php",
+                            type: "post",
+                            dataType: "html",
+                            data: formData,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(html){
 
 
-                            if(html==1){
-                                alert("Datos guardados satisfactoriamente");}
-                            else{
-                            $("#nombre").val('');
-                            $("#descripcion").val('');
-                            $("#institucion").val('');
-                            $("#palabras_claves").val('');
-                            $('#envio').val('');
-                            $('#o_aprendizaje').val('');}
-                        }
+                                if(html==1){
+                                    alert("Datos guardados satisfactoriamente");}
+                                    else{
+                                        $("#nombre").val('');
+                                        $("#descripcion").val('');
+                                        $("#institucion").val('');
+                                        $("#palabras_claves").val('');
+                                        $('#envio').val('');
+                                        $('#o_aprendizaje').val('');}
+                                    }
 
-                    })
+                                })
 
+                    });
                 });
-            });
 
-            var a = 0;
-            $('#o_aprendizaje').bind('change', function () {
-                if (document.getElementById("registrar").disabled == false) {
-                    document.getElementById("registrar").disabled = true;
-                }
-                var ext = $('#o_aprendizaje').val().split('.').pop().toLowerCase();
-                if ($.inArray(ext, ['zip']) == -1) {
-                    $('#error1').slideDown("slow");
+                var a = 0;
+                $('#o_aprendizaje').bind('change', function () {
+                    if (document.getElementById("registrar").disabled == false) {
+                        document.getElementById("registrar").disabled = true;
+                    }
+                    var ext = $('#o_aprendizaje').val().split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['zip']) == -1) {
+                        $('#error1').slideDown("slow");
                     //document.getElementById("texto").value = "error ";
                     $('#error2').slideUp("slow");
                     a = 0;
@@ -241,9 +237,9 @@ if (isset($_GET['mensaje'])) {
                      //alert("el nombre de archivo es: "+name);
                      //document.getElementById("registrar").disabled = false;
                      document.getElementById("nombre").value = name;
-                     }*/
-                }
-            });
+                 }*/
+             }
+         });
             //funcion validacion Recursos
             function comprobar_existencia(arreglo, valor) {
                 var flag = false;
@@ -279,15 +275,15 @@ if (isset($_GET['mensaje'])) {
                 } else
                 {
                     if(!document.getElementById('nombre').value.match(caracteres)){
-                         alert('El nombre solo puede contener letras(no caracteres especiales) y numeros!');
-                    }
-                    if(document.getElementById('nombre').value.length>15){
-                        alert('El nombre solo puede contener 15 caracteres como máximo!');
-                    }
-                    return false;
+                       alert('El nombre solo puede contener letras(no caracteres especiales) y numeros!');
+                   }
+                   if(document.getElementById('nombre').value.length>15){
+                    alert('El nombre solo puede contener 15 caracteres como máximo!');
                 }
+                return false;
             }
-        </script>
-    </body>
+        }
+    </script>
+</body>
 
 </html>

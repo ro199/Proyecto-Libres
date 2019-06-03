@@ -181,11 +181,11 @@ if ($_SESSION['tipo_usuario'] == 'ADM' ){
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetos de aprendizaje
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Repositorios
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../modulos_administrador/adm_objetos_aprendizaje.php">Importar y catalogar objetos de aprendizaje</a></li>
-                        <li><a href="../../modulos_administrador/adm_buscar.php">Buscar y administrar objetos de aprendizaje</a></li>
+                        <li><a href="../../modulos_administrador/adm_objetos_aprendizaje.php">Repositorio público</a></li>
+                        <li><a href="../../modulos_administrador/adm_buscar.php">Repositorio privado</a></li>
                     </ul>
                 </li>
                 <li><a href="../../modulos_administrador/adm_buscar_profesores.php">Gestionar Profesores</a></li>
@@ -199,7 +199,7 @@ if ($_SESSION['tipo_usuario'] == 'ADM' ){
                     <li><a href="../modulos_comunes/modulo_colaboradores/eliminar_colaborador.php">Eliminar</a></li>
                 </ul>
             </li>
-                <li><a href="../../modulos_administrador/adm_herramientas.php">Herramientas</a></li>
+                
                 <li class="active"><a href="index.php">Foro</a></li>
                 
                 
@@ -227,29 +227,14 @@ if ($_SESSION['tipo_usuario'] == 'ADM' ){
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="../../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
-                <li><a href="../../modulos_profesor/pro_buscar.php">Buscar</a></li>';
-                
-        if($activo=='V'){
-
-            echo '<li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores
-                <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="../modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                <li><a href="../modulo_colaboradores/registrar.php">Registrarse</a></li>
-                <li><a href="../modulo_colaboradores/perfil_colaborador.php">Perfil</a></li>
-                <li><a href="../modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
-            </ul>
-            </li>';
-            
-        }else if($activo=='F' or $numero==0){
-            
-            echo '<li><a href="../modulo_colaboradores/ejecutar_registrar_colaborador.php">Colaboradores</a></li>';
-                        
-        }          
-
-            echo '<li><a href="../../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Repositorios
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../modulos_profesor/pro_buscar.php">Repositorio público</a></li>
+                        <li><a href="../../modulos_profesor/pro_buscar_privado.php">Repositorio privado</a></li>
+                    </ul>
+                </li>
                 <li class="active"><a href="index.php">Foro</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

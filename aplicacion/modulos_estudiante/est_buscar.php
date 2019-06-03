@@ -91,18 +91,9 @@ if (@!$_SESSION['usuario']) {
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a href="../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
-                <li class="active"><a href="../modulos_profesor/pro_buscar.php">Buscar</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../modulos_comunes/modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/perfil_colaborador.php">Perfil</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
-                    </ul>
-                </li>
-                <li><a href="../modulos_estudiante/est_herramientas.php">Herramientas</a></li>
-                                <li><a href="../modulos_comunes/modulo_foro/index.php">Foro</a></li>
+                <li class="active"><a href="../modulos_profesor/pro_buscar.php">Repositorio personal</a></li>
+                <li><a href="../modulos_profesor/pro_buscar.php">Repositorio público</a></li>
+                <li><a href="../modulos_comunes/modulo_foro/index.php">Foro</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>

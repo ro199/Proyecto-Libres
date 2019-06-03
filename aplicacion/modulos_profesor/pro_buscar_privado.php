@@ -113,7 +113,7 @@ if (@!$_SESSION['usuario']) {
         <!-- --------------------------------------------- -->
         <div class="col-sm-12 text-center">
             <h2> Administración de recursos de aprendizaje</h2>
-            <form action="../modulos_profesor/pro_ejecutar_buscar.php" method="post" enctype="multipart/form-data">
+            <form action="../modulos_profesor/pro_ejecutar_buscar_privado.php" method="post" enctype="multipart/form-data">
                 <div class="col-md-3">
                 </div>
                 <div class="col-md-3 text-left ">
@@ -134,16 +134,13 @@ if (@!$_SESSION['usuario']) {
                     <button id="registrar" type="submit" class="btn btn-success">Buscar</button>
                     </br></br>
                 </div>
-
-
             </form>
-            <form action="../modulos_profesor/pro_importar_catalogar.php" method="post" enctype="multipart/form-data">
+            <form action="../modulos_profesor/pro_importar_catalogar_privado.php" method="post" enctype="multipart/form-data">
             <div class="col-md-3 text-left">
                 <button id="subirRA" type="submit" class="btn btn-success">Subir Recurso de aprendizaje</button>
                 </br></br>
                 </div>
             </form>
- 
             </div>
             <div class="container" >
                 <table class="table table-striped"border ="1|1" class="table table-bordered" id="tabla">
@@ -154,11 +151,7 @@ if (@!$_SESSION['usuario']) {
                         <td>Institución</td>
                         <td>Fecha Creación</td>
                         <td>Palabras Clave</td>
-                        <td>Tamaño</td>
-                        <td>Autor</td>
-                        <td>Comentarios</td>
-                        <td>Descargas</td>
-                    </tr>
+                            </tr>
                     </thead>
             </div>
 
@@ -166,7 +159,9 @@ if (@!$_SESSION['usuario']) {
             require_once '../clases_negocio/clase_conexion.php';
             require '../clases_negocio/funciones_oa_profesor.php';
             require '../clases_negocio/funciones_oa_estudiante.php';
-            $statement = ("select * from objeto_aprendizaje where tipo_repo = 0");
+            //$id_usuario = $_SESSION["id_usuario"];
+            $id_usuario = $_SESSION['id'];
+            $statement = 'select * from objeto_aprendizaje where id_usuario ="' . $_SESSION['id'] . '"and tipo_repo = 1';
             $conexion = new Conexion();
             $consulta = $conexion->prepare($statement);
             $consulta->setFetchMode(PDO::FETCH_ASSOC);
@@ -182,32 +177,16 @@ if (@!$_SESSION['usuario']) {
                     echo '<td>' . $row['institucion'] . '</td>';
                     echo '<td>' . $row['fechaCreacion'] . '</td>';
                     echo '<td>' . $row['palabras_clave'] . '</td>';
-                    echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
-                    if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
-                        echo '<td>ADMINISTRADOR</td>';
-                    }
 
-                    if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'PRO'){
-                        $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
-                        echo '<td>' . $profesor['nombres'] . ' ' . $profesor[
-                            'apellidos'] . '</td>';
-                    }
-
-                    if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'EST'){
-                        $estudiante = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
-                        echo '<td>' . $estudiante['nombres'] . ' ' . $estudiante['apellidos'] . '</td>';
-                    }
-
-                    echo '<td><a href="pro_comentarios.php?id='.$row['idobjeto_aprendizaje'].'">'. obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
-                    echo '<td>' . $row['descarga'] . '</td>';
                     if ($id_usuario == $row['id_usuario']) {
-                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='pro_buscar.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
+                        echo '<td><a href="pro_actualizar_oa.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
+                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='pro_buscar_privado.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
                     } else {
                         echo '<td>----</td>';
                         echo '<td>----</td>';
                     }
                     echo "<td><a href=" . $row['ruta'] . "  onclick= \"myFunction('" . $row['idobjeto_aprendizaje'] . "');\" >Descargar</a></td>";
-                    echo "<td><a href='#' onmouseover=\"hacer_hover('".$row['ruta']."');\"><span class='glyphicon glyphicon-eye-open'></a></td>";
+                    echo "<td><a href=publicar.php >Publicar</a></td>";
                 }
 
             }
@@ -217,7 +196,7 @@ if (@!$_SESSION['usuario']) {
             if (@$idborrar == 2) {
                 eliminar_objeto_aprendizaje($id);
                 echo '<script>alert("REGISTRO ELIMINADO")</script> ';
-                echo "<script>location.href='pro_buscar.php'</script>";
+                echo "<script>location.href='pro_buscar_privado.php'</script>";
             }
             $conexion = null;
             ?>

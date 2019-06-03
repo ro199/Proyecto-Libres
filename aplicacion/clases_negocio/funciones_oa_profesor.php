@@ -127,7 +127,33 @@ function actualizar_oa($id_objeto_aprendizaje, $nombre, $descripcion, $instituci
     $consulta_del = $conexion_del->prepare($statement_del);
     $consulta_del->execute();
 }
+function actualizar_oa_conruta($o_aprendizaje, $id_objeto_aprendizaje, $nombre, $descripcion, $institucion, $palabras_clave) {
+    //actualiazcion en storage
+    $nombre_original = obtener_oa_como_arreglo($id_objeto_aprendizaje)['nombre'];
+    $ruta_inicial = obtener_oa_como_arreglo($id_objeto_aprendizaje)['ruta'];
+    if ($nombre_original != $nombre) {
+        $nueva_ruta = $o_aprendizaje;
+        rename($ruta_inicial, $nueva_ruta);
+        $statement_del = 'UPDATE objeto_aprendizaje set nombre="' . $nombre . '", descripcion="' . $descripcion . '", institucion="' . $institucion . '",palabras_clave="' . $palabras_clave . '", ruta="' . $nueva_ruta . '" where idobjeto_aprendizaje=' . $id_objeto_aprendizaje;
+    } else {
+        $statement_del = 'UPDATE objeto_aprendizaje set nombre="' . $nombre . '", descripcion="' . $descripcion . '", institucion="' . $institucion . '",palabras_clave="' . $palabras_clave . '" where idobjeto_aprendizaje=' . $id_objeto_aprendizaje;
+    }
+    //echo $statement_del;
+    $conexion_del = new Conexion();
+    $consulta_del = $conexion_del->prepare($statement_del);
+    $consulta_del->execute();
+}
 
+function publicarRA($nombre) {
+    //actualiazcion en storage
+    $tipo_repo = 0;
+    $statement_del =  'UPDATE objeto_aprendizaje set tipo_repo = 0 where nombre= "' . $nombre . '"';
+
+    //echo $statement_del;
+    $conexion_del = new Conexion();
+    $consulta_del = $conexion_del->prepare($statement_del);
+    $consulta_del->execute();
+}
 function eliminar_objeto_aprendizaje($id_objeto_aprendizaje) {
     //eliminacion de storage
     $ruta = obtener_oa_como_arreglo($id_objeto_aprendizaje)['ruta'];

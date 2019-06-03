@@ -4,9 +4,9 @@ if (@!$_SESSION['usuario']) {
     header("Location:../../index2.php");
 } elseif ($_SESSION['tipo_usuario'] == 'EST') {
     //header("Location:index2.php");
-    echo "eres estudiante";
+    //echo "eres estudiante";
 } elseif ($_SESSION['tipo_usuario'] == 'ADM') {
-    echo "eres estudiante";
+    //echo "eres estudiante";
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -68,37 +68,33 @@ if (@!$_SESSION['usuario']) {
 
     <body>
         <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Bienvenid@: <strong><?php echo $_SESSION['usuario'] ?></strong></a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
-                        <li class="active"><a href="../modulos_profesor/pro_buscar.php">Buscar</a></li>
-                        <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Colaboradores
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Bienvenid@: <strong><?php echo $_SESSION['usuario'] ?></strong></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Repositorios
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../modulos_comunes/modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/perfil_colaborador.php">Perfil</a></li>
-                        <li><a href="../modulos_comunes/modulo_colaboradores/actualizar_datos_colaborador.php">Actualizar datos</a></li>
+                        <li><a href="../modulos_profesor/pro_buscar.php">Repositorio público</a></li>
+                        <li><a href="../modulos_profesor/pro_buscar_privado.php">Repositorio privado</a></li>
                     </ul>
                 </li>
-                        <li><a href="../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
                         <li><a href="../modulos_comunes/modulo_foro/index.php">Foro</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../../aplicacion/desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                          </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
         <!--Inicio de formulario -->
         <?php
         require '../clases_negocio/funciones_oa_profesor.php';
@@ -117,6 +113,14 @@ if (@!$_SESSION['usuario']) {
                             ?></p>
 
                         <input type="text" style="display:none;" name="id_objeto_aprendizaje" value='<?php echo $id_objeto_aprendizaje ?>' ></input>
+
+                        <div class="form-group" >
+                            <label for="file">Archivo que contine el recurso de aprendizaje:</label>
+                            <p id="error2" style="display:none; color:#FF0000;">
+                                El límite máximo de tamaño de archivo es 10MB.
+                            </p>
+                            <input type="file" class="form-control" id="o_aprendizaje" name="o_aprendizaje" required>
+                        </div>
 
                         <div class="form-group">
                             <label for="nombre">Nombre:</label>
@@ -148,10 +152,6 @@ if (@!$_SESSION['usuario']) {
                 </div>
             </div>
         </div></br></br></br>
-
-        <footer class="label-default container-fluid text-center">
-            <p class="copyright small">Copyright &copy; Jaime Crespin, Jossué Dután, Alexis Maldonado 2018</p>
-        </footer>
 
         <script>
             //funcion validacion objetos

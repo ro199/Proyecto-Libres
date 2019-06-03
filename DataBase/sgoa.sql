@@ -288,6 +288,7 @@ CREATE TABLE `objeto_aprendizaje` (
   `tamanio` varchar(45) DEFAULT NULL,
   `ruta` varchar(45) DEFAULT NULL,
   `materia` varchar(50) DEFAULT NULL,
+  `tipo_repo` int(2) DEFAULT NULL,
   `descarga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

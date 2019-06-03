@@ -107,9 +107,9 @@ if (@!$_SESSION['usuario']) {
                 <!-- --------------------------------------------- -->
                 <div class="col-sm-12 text-center"> 
                     <h2> Administración de objetos de aprendizaje</h2>
-                    <form action="../modulos_profesor/pro_ejecutar_buscar.php" method="post" enctype="multipart/form-data">
+                    <form action="../modulos_profesor/pro_ejecutar_buscar_privado.php" method="post" enctype="multipart/form-data">
                         <div class="col-md-3">
-                            <a href="../modulos_profesor/pro_buscar.php">Volver</a>
+                            <a href="../modulos_profesor/pro_buscar_privado.php">Volver</a>
                         </div>
                         <div class="col-md-3 text-left ">
                             <select class= "form-control" name="tipo_criterio" dir="ltr" required>
