@@ -59,7 +59,7 @@ if (@!$_SESSION['usuario']) {
                                     <option value="palabras_clave">palabra clave</option>
                                 </select>
                             </div>
-
+                            
                             <div class="col-md-3 text-center">
                                 <input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required>
                             </div>
@@ -69,92 +69,109 @@ if (@!$_SESSION['usuario']) {
                             </div>
                         </form>
                         
-                        <?php
-                            require_once '../clases_negocio/clase_conexion.php';
-                            require '../clases_negocio/funciones_oa_profesor.php';
-                            require '../clases_negocio/funciones_oa_estudiante.php';
+                        <div class="container">
+                            <table class="table table-striped"border ="1|1" class="table table-bordered" id="tabla">
+                                <thead>
+                                    <tr class="warning">
+                                        <td>Nombre</td>
+                                        <td>Descripción</td>
+                                        <td>Institución</td>
+                                        <td>Fecha Creación</td>
+                                        <td>Palabras Clave</td>
+                                        <td>Tamaño</td>
+                                        <td>Autor</td>
+                                        <td>Comentarios</td>
+                                        <td>Descargas</td>
+                                    </tr>
+                                </thead>                        
+                            </table>
+                                <?php
+                                    require_once '../clases_negocio/clase_conexion.php';
+                                    require '../clases_negocio/funciones_oa_profesor.php';
+                                    require '../clases_negocio/funciones_oa_estudiante.php';
+                                    $statement = ("select * from objeto_aprendizaje");
+                                    echo "Soy estudiante";
+                                    $conexion = new Conexion();
+                                    $consulta = $conexion->prepare($statement);
+                                    $consulta->setFetchMode(PDO::FETCH_ASSOC);
+                                    $consulta->execute();
+
+                                    $id_usuario = $_SESSION['id'];
+                                    if ($consulta->rowCount() != 0) {
+                                        while ($row = $consulta->fetch()) {
+                                            echo '<tr class="success">';
+                                            echo '<td>' . $row['nombre'] . '</td>';
+                                            echo '<td>' . $row['descripcion'] . '</td>';
+                                            echo '<td>' . $row['institucion'] . '</td>';
+                                            echo '<td>' . $row['fechaCreacion'] . '</td>';
+                                            echo '<td>' . $row['palabras_clave'] . '</td>';
+                                            echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
+                                            if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
+                                                echo '<td>ADMINISTRADOR</td>';
+                                            }
+
+                                            if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'PRO'){
+                                                $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
+                                                echo '<td>' . $profesor['nombres'] . ' ' . $profesor[
+                                                    'apellidos'] . '</td>';
+
+                                            }
+                                            if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'EST'){
+                                                $estudiante = obtener_estudiante_como_arreglo(obtener_id_estudiante_con_id_usuario($row['id_usuario']));
+                                                echo '<td>' . $estudiante['nombres'] . ' ' . $estudiante['apellidos'] . '</td>';
+                                            }
 
 
-                            //adquisicion de parametros de busqueda 
-                            $criterio = filter_input(INPUT_POST, 'tipo_criterio');
-                            $valor_criterio = filter_input(INPUT_POST, 'criterio_busqueda');
-                            $statement = 'select * from objeto_aprendizaje';
-                            $clausula_where = '';
-                            switch ($criterio) {
-                                case 'nombre':
-                                    $clausula_where = ' where nombre like "%' . $valor_criterio . '%" order by nombre';
-                                    $statement = 'select * from objeto_aprendizaje' . $clausula_where;
-                                    break;
-                                case 'descripcion':
-                                    $clausula_where = ' where descripcion like "%' . $valor_criterio . '%" order by descripcion';
-                                    $statement = 'select * from objeto_aprendizaje' . $clausula_where;
-                                    break;
-                                case 'institucion':
-                                    $clausula_where = ' where institucion like "%' . $valor_criterio . '%" order by institucion';
-                                    $statement = 'select * from objeto_aprendizaje' . $clausula_where;
-                                    break;
-                                case 'palabras_clave':
-                                    $clausula_where = ' where palabras_clave like "%' . $valor_criterio . '%" order by palabras_clave';
-                                    $statement = 'select * from objeto_aprendizaje' . $clausula_where;
-                                    break;
-                                case 'autor':
-                                    $statement='select oa.* from objeto_aprendizaje as oa, usuario as u, profesor as p where oa.id_usuario=u.idUsuario and u.idUsuario=p.id_usuario and (p.nombres like "%'.$valor_criterio.'%" or p.apellidos like "%'.$valor_criterio.'%")';
-                                    break;
-                            }
-                            
-                            //fin de adquisicion de parametros de busqueda
-                            $conexion = new Conexion();
-                            $consulta = $conexion->prepare($statement);
-                            $consulta->setFetchMode(PDO::FETCH_ASSOC);
-                            $consulta->execute();
+                                            echo '<td><a href="est_comentarios.php?id='.$row['idobjeto_aprendizaje'].'">'. obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
+                                            echo '<td>' . $row['descarga'] . '</td>';
+                                            echo "<td><a href=" . $row['ruta'] . "  onclick= \"myFunction('" . $row['idobjeto_aprendizaje'] . "');\" >Descargar</a></td>";
+                                            echo "<td><a href='#' onmouseover=\"hacer_hover('".$row['ruta']."');\"><span class='glyphicon glyphicon-eye-open'></a></td>";
+                                        }
 
-                            echo '<table border ="1|1" class="table table-condensed";>';
-                            echo '<tr class="warning">';
-                            //echo '<td>Id</td>';
-                            echo '<td>Nombre</td>';
-                            echo '<td>Descripción</td>';
-                            //echo '<td>idProfesor</td>';
-                            echo '<td>Institucion</td>';
-                            echo '<td>FechaCreacion</td>';
-                            echo '<td>palabras clave</td>';
-                            echo '<td>Tamaño</td>';
-                            echo '<td>Comentarios</td>';
-                            //echo "<td>ruta</td>";
-                            echo "</tr>";
-
-                            if ($consulta->rowCount() != 0) {
-                                while ($row = $consulta->fetch()) {
-                                    echo '<tr class="success">';
-                                    //echo '<td>' . $row['idobjeto_aprendizaje'] . '</td>';
-                                    echo '<td>' . $row['nombre'] . '</td>';
-                                    echo '<td>' . $row['descripcion'] . '</td>';
-                                    //echo '<td>' . $row['id_profesor'] . '</td>';
-                                    echo '<td>' . $row['institucion'] . '</td>';
-                                    echo '<td>' . $row['fechaCreacion'] . '</td>';
-                                    echo '<td>' . $row['palabras_clave'] . '</td>';
-                                    echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
-                                    if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
-                                        echo '<td>ADMINISTRADOR</td>';
-                                    } else {
-                                        $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
-                                        echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
                                     }
-                                    //echo '<td>' . $row['ruta'] . '</td>';
-                                    echo '<td><a href="est_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
 
-                                    echo '<td><a href="' . $row['ruta'] . '">Descargar</a></td>';
-                                    echo '</tr>';
-                                }
-                            }
-                            
-                            echo '</table>';
-                        ?>   
+                                echo '</table>';
+                                    extract($_GET);
+                                    if (@$idborrar == 2) {
+                                        eliminar_objeto_aprendizaje($id);
+                                        echo '<script>alert("REGISTRO ELIMINADO")</script> ';
+                                        echo "<script>location.href='est_buscar.php'</script>";
+                                    }
+                                    $conexion = null;
+                                ?>
+                                <script type = "text/javascript">
+                                    (function(){
+                                        location.reload();
+                                        //$("#tabla").ajax().reload();
+                                    }, 10000);
+
+                                    function myFunction(id_objeto)
+                                    {
+
+                                        $.ajax({
+
+                                            url: 'pro_ejecutar_actualizar_descarga.php',
+                                            type: 'POST',
+                                            data: 'objeto_id='+id_objeto,
+
+                                            async : false,
+
+                                        });
+
+                                    }
+                                </script>
+                                <script>
+                                    function hacer_hover($x)
+                                    {
+                                        myPopup = window.open('../modulos_administrador/previsualizar.php?vs='+$x,'popupWindow','width=640,height=480');
+                                        myPopup.opener = self;
+                                    }
+                                </script>
+                        </div>                   
                     </div>
                 </div>
            </section>
        </main>
-        
-
     </body>
 
 </html>
