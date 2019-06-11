@@ -1,4 +1,4 @@
-﻿-- phpMyAdmin SQL Dump
+﻿u-- phpMyAdmin SQL Dump
 -- version 4.8.0.1
 -- phpMyAdmin SQL Dump
 -- version 4.8.0.1
@@ -350,8 +350,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `usuario`, `contrasenia`, `tipo_usuario`, `activo`,`cambio_de_clave`) VALUES
-(1, 'admin', 'admin', 'ADM', 'V', 'F'),
-(2, 'ktapia', 'hola123', 'EST', 'V'),
+(1, 'PaulLora1', '123', 'EST', 'V', 'F'),
+(2, 'ktapia', 'hola123', 'EST', 'V', 'F'),
 (4, 'AlexisMaldonado0', 'alexis', 'PRO', 'V', 'F'),
 (5, 'FernandoTapia0', 'bESn9', 'PRO', 'F', 'F'),
 (6, 'mmjaramilloarteaga', 'mmjaramilloarteaga', 'EST', 'V', 'F'),
