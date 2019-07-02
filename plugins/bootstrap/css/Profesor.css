@@ -30,8 +30,9 @@ header {
     margin: auto;
 }
 
-h1{
+.Menu-Vertical h1{
     float: left;
+    font-size: 1.5em;
 }
 
 header .Menu-Vertical {
@@ -41,4 +42,10 @@ header .Menu-Vertical {
 section {
     width: 100%;
     margin-bottom: 25px;
+}
+
+@media (min-width:1024px){
+    .Menu-Vertical{
+        width: 1000px;
+    }
 }

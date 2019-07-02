@@ -1,0 +1,47 @@
+Ptrones de estructura
+*Adaptador: 
+**es un patron de disenio estructural que permite la colaboracion de objetos con 
+interfaces incompatibles(Son las que no pueden heredar entre si).
+
+**Problema: Una aplicacion descarga datos en formato xml, pero a esa aplicacion se le 
+quiere agregar una biblioteca de analisis,el problema
+	es que recibe datos en formato JSON.
+*Puente:Brigde
+**Permite dividir una clase grande en dos jerarquias separadas-abastraccion e implementacion-que 
+	pueden ser desarrolladas independientemente una de otra.
+**Problema:
+Abstraccion e implementacion.
+Se crea muchas subclases y crea una complejidad grande ejemplo figuras.
+*Composite
+**permite componer objetos en estructuras de arbol y luego trabajar con estas estructuras como 
+si fueras objetos individuales.
+ 
+**Problema: Como obtener el precio total de un pedido, Cajas y productos.
+
+*Decorador o Wrapper
+**Permite adjuntar nuevos comportamientos a los objetos de una envlotura especial que 
+contiene los comportamientos.
+
+**Problema: varias formas de enviar notificaciones o mensajes (Mucho codigo en las clases)
+
+No se permite tener varios padres en la herencia.
+ Aqui se ocupa la composicion
+
+*Facade
+**Proporciona una interfaz simplificada a una bliblioteca, un marco o cualquier otro
+conjunto complejo de clases.
+
+**Problema: 
+
+Proporciona una interfaz simple, con un fondo de varias caracteristicas
+
+
+
+
+
+Disenio Creacionales
+*Abstrac Factory: 
+**Permite producir familias de objetos relacionados sin especificar sus 
+clases concretas.
+
+**Problema:  

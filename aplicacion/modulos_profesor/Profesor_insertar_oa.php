@@ -17,16 +17,22 @@ $path = $_FILES['o_aprendizaje']['name'];
 $ext = pathinfo($path, PATHINFO_EXTENSION);
 $target_file =$almacenamiento . urlencode($nombre). '.' . $ext;
 $id_usuario= $_SESSION['id'];
+$repo= filter_input(INPUT_POST, 'repo');
 
 $conexion = new Conexion();
-$statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion,id_usuario,institucion,palabras_clave,tamanio,ruta,materia, tipo_repo,descarga) VALUES (?, ?, ?, ?,?,?,?,?,?,?)';
+$statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion,id_usuario,institucion,palabras_clave,tamanio,ruta,materia, tipo_repo,descarga,Publicacion) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 $consulta = $conexion->prepare($statement);
-if ($consulta->execute(array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 0,0))) {
-    $seGuardo_db = 1;
-    /*$mail = 'alexis.maldonado@epn.edu.ec';
-    $user = 'alexis';
+if($repo == "PUB"){
+    $cadena=array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 1,0,$repo);
+}
 
-    enviar_mail3($mail, $user, $target_file);*/
+if($repo == "PRI"){
+    $cadena=array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 1,0,$repo);
+}
+
+
+if ($consulta->execute($cadena)) {
+    $seGuardo_db = 1;
     actualizar_cant_materia($cbx_materia);
     echo "1";
 } else {
@@ -55,24 +61,23 @@ if ($seGuardo_db == 1) {
             if ($statement->rowCount() != 0) {
                 $statement="UPDATE colaborador SET activo='V' WHERE idUsuario=".$id_usuario;
             }else{
-            $statement = "INSERT INTO colaborador (idUsuario,activo) VALUES (".$id_usuario.",'V')";
-            $statement = $conexion->prepare($statement);
-            if($statement->execute()){
-                if($_SESSION['tipo_usuario']=='EST') $tabla = "estudiante";
-                else $tabla = "profesor";
+                $statement = "INSERT INTO colaborador (idUsuario,activo) VALUES (".$id_usuario.",'V')";
+                $statement = $conexion->prepare($statement);
+                if($statement->execute()){
+                    if($_SESSION['tipo_usuario']=='EST') $tabla = "estudiante";
+                    else $tabla = "profesor";
 
-                $query = "SELECT mail FROM usuario as u JOIN ".$tabla." as a ON (a.id_usuario=u.idUsuario) WHERE idUsuario=".$id_usuario;
-                $query = $conexion->prepare($query);
-                $query->setFetchMode(PDO::FETCH_ASSOC);
-                $query->execute();
-                $row = $query->fetch();
-                enviar_mail4($row['mail'],'GRACIAS POR SU APORTE!','Ahora forma parte de nuestro grupo de colaboradores');
-                echo '<script type="text/javascript">alert("Objeto de aprendizaje subido correctamente");</script>';
-                header("Location: pro_buscar.php");
-            }
+                    $query = "SELECT mail FROM usuario as u JOIN ".$tabla." as a ON (a.id_usuario=u.idUsuario) WHERE idUsuario=".$id_usuario;
+                    $query = $conexion->prepare($query);
+                    $query->setFetchMode(PDO::FETCH_ASSOC);
+                    $query->execute();
+                    $row = $query->fetch();
+                    enviar_mail4($row['mail'],'GRACIAS POR SU APORTE!','Ahora forma parte de nuestro grupo de colaboradores');
+                    echo '<script type="text/javascript">alert("Objeto de aprendizaje subido correctamente");</script>';
+                    header("Location: pro_buscar.php");
+                }
             }
 
-           
         } else {
 
             $seGuardo_sto = 0;
