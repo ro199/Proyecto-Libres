@@ -1,0 +1,55 @@
+Software 2 clase 8
+Componentes
+Interfaces nos sirves para ilsuatrar dependencias. porm medio de este podemos hacer componentes reusables.
+Existen dos tipos de interfaces 
+**pROVIDE:  simbolo de paleta
+**Required: simbolo )--------
+
+
+Flecha de dependencia es punteada <------
+
+
+Realizacion y Dependecia
+Es mostrar el uso de la interfaz de una manera mas a detalle
+
+Flecha de realizacion <|----------, cabeza cerrada.
+
+
+Componente de caja negra
+es cuando ocupa un servicio, osea lo requiero, voy a requerir un componente elaborado por otra persona.
+Como neatbeans.
+
+
+Puerto, se lo representa como una caja pequenia.
+pueden ser bidireccionales.
+agrupa interfaces que estan relacionadas entre si.
+
+Estereotipo:
+Lo ubicamos
+
+Abtraccion es una bbuena concesion del proyecto.
+No siempre un subsistema es un componente.
+
+El diagrama de despliegue nos permite ubicar los servidores.
+****************************************************
+
+La metodologia 
+tiene un proceso los metodos, paso a seguir.
+
+La gente va a estar evaluada todo el tiempo.
+
+
+
+Desarrollo Iterativo
+Lo hacemos en espacios de tiempo por partes.
+Iterativo Incremental: Poco a poco en cada sprint voy a generar una salida, avanza en elperiodo.
+Todo queda autodocumentado.
+
+
+
+Proceso Unificado 
+esta basado en casos de uso.
+
+
+
+

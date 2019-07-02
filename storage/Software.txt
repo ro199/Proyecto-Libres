@@ -1,0 +1,53 @@
+paradigma: es algo que guia mi camino
+-------no son metodologias
+Desarrolo de SW Industrial Flexible
+** Responde rapidamente a nuesvas necesidaes del cliente
+** Vamos a ver tecniacs de ingenieria y como se construye.
+** 
+Ingenieria de lineas de productos
+* Mediante un SW que yo genere todos sus componentes son reusables.
+Ingenieria del dominio
+* Utiliza una plataforma reusable, y definir similitudes y variables de lineas de productos.
+* Genera motores de produccion
+Ingenieria de Aplicacion
+* Identificar y Derivar aplicaciones de la linea del producto a partir de la plataforma  "Que mas  puedo hacer"
+
+Punto fuerte de la metodologia
+* es partir de la nada, 
+* el SW debe ser flexible y evolucionable(se adapte facilmente y no haya cambios, 
+*******Anazabilidad=> entender kas estructuras
+*******Integridad arquitectural=>Todos los modulos se ocupan de lo que a el le corresponde, analizando solo sus partes, es limpia la clase.
+*******Cambiabilidad=>Se pueda cambiar algo, Si yo cambio algo en cualquier lugar no afecte a las demas, "Tecnica refactorizar", versionamiento del software.
+*******Extensibilidad=>El programa debe ser escalable, puede dar mayores servicios, 
+*******Portabilidad=> Funciona 
+*******Testeabilidad=> Las pruebas que se realizan 
+clasificacion de las pruebas, y 
+*******Atributos especificos del dominio=> Son modulos"Software empresarrial"). 
+
+Si el SW se ve afectado no tuvo esa capacidad de mantenabilidad.
+
+------------------------------------------------************************------------------------------------
+Disenio de patrones
+*es una herramienta que permite probar y testear 
+
+Para el disenio hay dos tipos de patrones
+*Creacionales
+**Incremetan la flexibilidad
+
+*Estructurales
+**
+
+Se debe seguir una metodologia y su desarrollo sigue patrones
+
+Linea de produccion es un tipo
+
+Software tipo empresarial o ERP
+
+*Interfaz
+Una clase que define comportamientos.
+** solo tiene metodos abstractos, es como dar ordenes, "deliver=entrega".
+
+Para seruna empresa de software tenemos que tener los 3 componentes
+tecnologico.
+metodos.
+Conocimiento.

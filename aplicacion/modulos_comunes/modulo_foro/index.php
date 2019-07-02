@@ -156,15 +156,6 @@ if (@!$_SESSION['usuario']) {
 
 <?php 
     require '../../clases_negocio/clase_conexion.php';
-    $conexion = new Conexion();
-    $statement = "SELECT count(*), colaborador.activo FROM colaborador JOIN usuario ON (colaborador.idUsuario=usuario.idUsuario) 
-            WHERE usuario.idUsuario =".$_SESSION['id'];
-    $consulta = $conexion->prepare($statement);
-	$consulta->setFetchMode(PDO::FETCH_ASSOC);
-	$consulta->execute();
-	$row = $consulta->fetch();
-    $activo = $row['activo'];
-    $numero = $row['count(*)'];
     
 if ($_SESSION['tipo_usuario'] == 'ADM' ){
    
