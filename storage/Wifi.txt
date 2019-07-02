@@ -1,0 +1,2 @@
+wifi analizer
+cambiar al canal 7 

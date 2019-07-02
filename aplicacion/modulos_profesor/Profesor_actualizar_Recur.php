@@ -32,7 +32,7 @@ if (@!$_SESSION['usuario']) {
                    <a href="../modulos_profesor/Profesor_Cargar_Recur.php">Cargar un Recurso</a>
                    <a href="../modulos_profesor/Profesor_Repositorio.php">Repositorio Privado</a>
                    <a href="../modulos_profesor/Profesor_Repositorio_Pub.php">Repositorio Público</a>
-                   <a href="#">Foros</a>
+                   <a href="../modulos_comunes/modulo_foro/index.php">Foro</a>
                    <a href="../desconectar_sesion.php">Salir</a>
                </nav>
            </div>

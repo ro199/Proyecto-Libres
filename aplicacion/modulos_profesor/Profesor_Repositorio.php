@@ -31,7 +31,7 @@ if (@!$_SESSION['usuario']) {
                    <a href="../modulos_profesor/Profesor_Cargar_Recur.php">Cargar un Recurso</a>
                    <a href="../modulos_profesor/Profesor_Repositorio.php">Repositorio Privado</a>
                    <a href="../modulos_profesor/Profesor_Repositorio_Pub.php">Repositorio Público</a>
-                   <a href="#">Foros</a>
+                   <a href="../modulos_comunes/modulo_foro/index.php">Foro</a>
                    <a href="../desconectar_sesion.php">Salir</a>
                </nav>
            </div>
@@ -122,7 +122,7 @@ if (@!$_SESSION['usuario']) {
                                     echo '<td>' . $row['descripcion'] . '</td>';
                                     echo '<td>' . $row['institucion'] . '</td>';
                                     echo '<td>' . $row['fechaCreacion'] . '</td>';
-                                    echo '<td><a href="pro_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
+                                    echo '<td>'. obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) .'</td>';
 
                                     if ($id_usuario == $row['id_usuario']) {
                                         echo '<td><a href="Profesor_actualizar_Recur.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
@@ -178,12 +178,7 @@ if (@!$_SESSION['usuario']) {
                                     });
 
                                 }
-                                function myFunction2($id_objeto)
-                                {
-                                    $.ajax({
 
-                                    });
-                                }
                             </script>
                             <script>
                                 function hacer_hover($x)
