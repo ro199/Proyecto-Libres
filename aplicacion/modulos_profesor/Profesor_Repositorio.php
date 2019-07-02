@@ -65,9 +65,6 @@ if (@!$_SESSION['usuario']) {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <select name="Privado" dir="ltr">
-                                            <option value="PRI"></option>
-                                        </select>
                                     </div>
                                     <div class="col-md-3 text-left">
                                         <button id="registrar" type="submit" class="btn btn-success">Buscar</button>
@@ -91,12 +88,10 @@ if (@!$_SESSION['usuario']) {
                                         <td>Descripción</td>
                                         <td>Institución</td>
                                         <td>Fecha Creación</td>
-                                        <td>Comentarios</td>
                                         <td>Actualizar</td>
                                         <td>Eliminar</td>
                                         <td>Descargar</td>
                                         <td>Publicar</td>
-                                        <td>Estado</td>
                                     </tr>
                                     </thead>
                             </div>
@@ -107,7 +102,7 @@ if (@!$_SESSION['usuario']) {
                             require '../clases_negocio/funciones_oa_estudiante.php';
 
                             $id_usuario = $_SESSION['id'];
-                            $statement = 'select * from objeto_aprendizaje where id_usuario ="' . $_SESSION['id'] . '"and tipo_repo = 1 and Privado= "SI"';
+                            $statement = 'select * from objeto_aprendizaje where id_usuario ="' . $_SESSION['id'] . '"and tipo_repo = 1 and Publicacion= "PRI"';
                             $conexion = new Conexion();
                             $consulta = $conexion->prepare($statement);
                             $consulta->setFetchMode(PDO::FETCH_ASSOC);
@@ -122,11 +117,10 @@ if (@!$_SESSION['usuario']) {
                                     echo '<td>' . $row['descripcion'] . '</td>';
                                     echo '<td>' . $row['institucion'] . '</td>';
                                     echo '<td>' . $row['fechaCreacion'] . '</td>';
-                                    echo '<td><a href="pro_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
 
                                     if ($id_usuario == $row['id_usuario']) {
                                         echo '<td><a href="Profesor_actualizar_Recur.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
-                                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el recurso de aprendizaje?');\" href='Profesor_Repositorio.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
+                                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='pro_buscar_privado.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
                                     } else {
                                         echo '<td>----</td>';
                                         echo '<td>----</td>';
@@ -136,13 +130,9 @@ if (@!$_SESSION['usuario']) {
                                             <span class='icon-download-cloud'></span></a>
                                             </td>";
                                     echo "<td>
-                                            <a onClick=\"javascript: return confirm('Realmente desea Publicar el recurso?');\" href='Profesor_Repositorio.php?id=".$row['idobjeto_aprendizaje']."&idborrar=3'><span class='icon-ok-squared'></a>
+                                            <a href=publicar.php onclick=\"myFunction2('" . $row['idobjeto_aprendizaje'] . "');\" >
+                                            <span class='icon-ok-squared'></span></a>
                                             </td>";
-                                    if($row['Publico']){
-                                        echo '<td>Publicado</td>';
-                                    }else{
-                                        echo '<td>No publicado</td>';
-                                    }
                                 }
 
                             }
@@ -153,12 +143,6 @@ if (@!$_SESSION['usuario']) {
                                 eliminar_objeto_aprendizaje($id);
                                 echo '<script>alert("REGISTRO ELIMINADO")</script> ';
                                 echo "<script>location.href='Profesor_Repositorio.php'</script>";
-                            }
-                            if(@$idborrar == 3){
-                                publicar($id);
-                                echo '<script>alert("REGISTRO PUBLICADO")</script> ';
-                                echo "<script>location.href='Profesor_Repositorio.php'</script>";
-
                             }
                             $conexion = null;
                             ?>
@@ -182,6 +166,10 @@ if (@!$_SESSION['usuario']) {
                                 {
                                     $.ajax({
 
+                                        url: 'publicar.php',
+                                        type: 'POST',
+                                        data: 'objeto_id='+$id_objeto,
+                                        async : false,
                                     });
                                 }
                             </script>

@@ -20,14 +20,14 @@ $id_usuario= $_SESSION['id'];
 $repo= filter_input(INPUT_POST, 'repo');
 
 $conexion = new Conexion();
-$statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion,id_usuario,institucion,palabras_clave,tamanio,ruta,materia, tipo_repo,descarga,Privado,Publico) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+$statement = 'INSERT INTO objeto_aprendizaje (nombre,descripcion,id_usuario,institucion,palabras_clave,tamanio,ruta,materia, tipo_repo,descarga,Publicacion) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 $consulta = $conexion->prepare($statement);
 if($repo == "PUB"){
-    $cadena=array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 1,0,"SI","SI");
+    $cadena=array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 1,0,$repo);
 }
 
 if($repo == "PRI"){
-    $cadena=array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 1,0,"SI","NO");
+    $cadena=array($nombre, $descripcion, $id_usuario, $institucion, $palabras_clave, $_FILES["o_aprendizaje"]["size"], $target_file, consultar_materiaxid($cbx_materia), 1,0,$repo);
 }
 
 

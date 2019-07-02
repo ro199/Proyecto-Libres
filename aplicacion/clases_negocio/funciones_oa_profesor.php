@@ -165,13 +165,6 @@ function eliminar_objeto_aprendizaje($id_objeto_aprendizaje) {
     $consulta_del->execute(array($id_objeto_aprendizaje));
 }
 
-function publicar($id_objeto_aprendizaje){
-    $statement_del = "UPDATE objeto_aprendizaje SET Publico = 'SI' WHERE idobjeto_aprendizaje=?";
-    $conexion_del = new Conexion();
-    $consulta_del = $conexion_del->prepare($statement_del);
-    $consulta_del->execute(array($id_objeto_aprendizaje));
-}
-
 
 function eliminarComentario($id_comentario){
     $statement_del = "DELETE FROM comentario WHERE idcomentario=?";

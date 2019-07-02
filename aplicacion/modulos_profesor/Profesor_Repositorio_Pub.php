@@ -65,9 +65,6 @@ if (@!$_SESSION['usuario']) {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <select name="Privado" dir="ltr">
-                                            <option value="PUB"></option>
-                                        </select>
                                     </div>
                                     <div class="col-md-3 text-left">
                                         <button id="registrar" type="submit" class="btn btn-success">Buscar</button>
@@ -89,7 +86,6 @@ if (@!$_SESSION['usuario']) {
                                     <td>Descripción</td>
                                     <td>Institución</td>
                                     <td>Fecha Creación</td>
-                                    <td>Comentarios</td>
                                     <td>Descargar</td>
                                 </tr>
                                 </thead>
@@ -101,7 +97,7 @@ if (@!$_SESSION['usuario']) {
                             require '../clases_negocio/funciones_oa_estudiante.php';
                             //$id_usuario = $_SESSION["id_usuario"];
                             $id_usuario = $_SESSION['id'];
-                            $statement = 'select idobjeto_aprendizaje, usuario, nombre, descripcion, institucion, fechaCreacion, oa.id_usuario as id_usuario, ruta from objeto_aprendizaje oa join usuario u on oa.id_usuario=u.idUsuario where tipo_repo=1 and Publico="SI"';
+                            $statement = 'select idobjeto_aprendizaje, usuario, nombre, descripcion, institucion, fechaCreacion, oa.id_usuario as id_usuario, ruta from objeto_aprendizaje oa join usuario u on oa.id_usuario=u.idUsuario where tipo_repo=1 and Publicacion="PUB"';
                             $conexion = new Conexion();
                             $consulta = $conexion->prepare($statement);
                             $consulta->setFetchMode(PDO::FETCH_ASSOC);
@@ -117,7 +113,6 @@ if (@!$_SESSION['usuario']) {
                                     echo '<td>' . $row['descripcion']. '</td>';
                                     echo '<td>' . $row['institucion']. '</td>';
                                     echo '<td>' . $row['fechaCreacion']. '</td>';
-                                    echo '<td><a href="pro_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
                                     echo "<td>
                                             <a href=" . $row['ruta'] . "  onclick= \"myFunction('" . $row['idobjeto_aprendizaje'] . "');\" >
                                             <span class='icon-download-cloud'></span></a>
