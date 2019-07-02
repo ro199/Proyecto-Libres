@@ -126,7 +126,7 @@ if (@!$_SESSION['usuario']) {
 
                                     if ($id_usuario == $row['id_usuario']) {
                                         echo '<td><a href="Profesor_actualizar_Recur.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
-                                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='Profesor_Repositorio.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
+                                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el recurso de aprendizaje?');\" href='Profesor_Repositorio.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
                                     } else {
                                         echo '<td>----</td>';
                                         echo '<td>----</td>';
@@ -136,9 +136,13 @@ if (@!$_SESSION['usuario']) {
                                             <span class='icon-download-cloud'></span></a>
                                             </td>";
                                     echo "<td>
-                                            <a href=publicar.php onclick=\"myFunction2('" . $row['idobjeto_aprendizaje'] . "');\" >
-                                            <span class='icon-ok-squared'></span></a>
+                                            <a onClick=\"javascript: return confirm('Realmente desea Publicar el recurso?');\" href='Profesor_Repositorio.php?id=".$row['idobjeto_aprendizaje']."&idborrar=3'><span class='icon-ok-squared'></a>
                                             </td>";
+                                    if($row['Publico']){
+                                        echo '<td>Publicado</td>';
+                                    }else{
+                                        echo '<td>No publicado</td>';
+                                    }
                                 }
 
                             }
@@ -149,6 +153,12 @@ if (@!$_SESSION['usuario']) {
                                 eliminar_objeto_aprendizaje($id);
                                 echo '<script>alert("REGISTRO ELIMINADO")</script> ';
                                 echo "<script>location.href='Profesor_Repositorio.php'</script>";
+                            }
+                            if(@$idborrar == 3){
+                                publicar($id);
+                                echo '<script>alert("REGISTRO PUBLICADO")</script> ';
+                                echo "<script>location.href='Profesor_Repositorio.php'</script>";
+
                             }
                             $conexion = null;
                             ?>
@@ -172,10 +182,6 @@ if (@!$_SESSION['usuario']) {
                                 {
                                     $.ajax({
 
-                                        url: 'publicar.php',
-                                        type: 'POST',
-                                        data: 'objeto_id='+$id_objeto,
-                                        async : false,
                                     });
                                 }
                             </script>
