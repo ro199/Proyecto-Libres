@@ -1,0 +1,10 @@
+Metodologia TDD (Desarrollo dirigido por test)
+Consiste en dos cosas:
+1 Escribir Pruebas
+2 Escribir Codigo Fuente.
+3 Refactorizar
+
+TDD no es para hacer pruebas, es una practica que envuelve el desarrollo en su conjunto.
+Kent Beck creo el modulo JUNIT y XP.
+Se trabaja con dos colores rojo no se cumple y verde ya se cumplio.
+

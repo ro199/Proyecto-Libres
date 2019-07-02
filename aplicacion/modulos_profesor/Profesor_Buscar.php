@@ -116,53 +116,78 @@ if (@!$_SESSION['usuario']) {
                     $consulta->execute();
 
                     $id_usuario = $_SESSION['id'];
+                    $repo = filter_input(INPUT_POST, 'Privado');
 
+                    if($repo == "PRI"){
+                        echo '<table border ="1|1" class="table table-condensed";>';
+                        echo '<tr class="warning">';
+                        echo '<td>Nombre</td>';
+                        echo '<td>Descripción</td>';
+                        echo '<td>Institucion</td>';
+                        echo '<td>FechaCreacion</td>';
+                        echo '<td>Comentarios</td>';
+                        echo "<td>Actualizar</td>";
+                        echo "<td>Eliminar</td>";
+                        echo "<td>Descargar</td>";
+                        echo "</tr>";
 
-                    echo '<table border ="1|1" class="table table-condensed";>';
-                    echo '<tr class="warning">';
-                    echo '<td>Nombre</td>';
-                    echo '<td>Descripción</td>';
-                    echo '<td>Institucion</td>';
-                    echo '<td>FechaCreacion</td>';
-                    echo '<td>Tamaño</td>';
-                    echo '<td>Autor</td>';
-                    echo '<td>Comentarios</td>';
-                    echo "<td>Actualizar</td>";
-                    echo "<td>Eliminar</td>";
-                    echo "<td>Descargar</td>";
-                    echo "</tr>";
+                        if ($consulta->rowCount() != 0) {
+                            while ($row = $consulta->fetch()) {
+                                echo '<tr class="success">';
+                                //echo '<td>' . $row['idobjeto_aprendizaje'] . '</td>';
+                                echo '<td>' . $row['nombre'] . '</td>';
+                                echo '<td>' . $row['descripcion'] . '</td>';
+                                echo '<td>' . $row['institucion'] . '</td>';
+                                echo '<td>' . $row['fechaCreacion'] . '</td>';
+                                echo '<td><a href="pro_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
+                                if ($id_usuario == $row['id_usuario']) {
+                                    echo '<td><a href="Profesor_actualizar_Recur.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
 
-                    if ($consulta->rowCount() != 0) {
-                        while ($row = $consulta->fetch()) {
-                            echo '<tr class="success">';
-                            //echo '<td>' . $row['idobjeto_aprendizaje'] . '</td>';
-                            echo '<td>' . $row['nombre'] . '</td>';
-                            echo '<td>' . $row['descripcion'] . '</td>';
-                            echo '<td>' . $row['institucion'] . '</td>';
-                            echo '<td>' . $row['fechaCreacion'] . '</td>';
-                            echo '<td>' . number_format($row['tamanio'] / 1e6, 2, '.', '') . ' MB' . '</td>';
-                            if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
-                                echo '<td>ADMINISTRADOR</td>';
-                            } else {
-                                $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
-                                echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
+                                    echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='Profesor_Buscar.php?id=" . $row['idobjeto_aprendizaje'] . "&idborrar=2'><span class='glyphicon glyphicon-remove'></a></td>";
+                                } else {
+                                    echo '<td>----</td>';
+                                    echo '<td>----</td>';
+                                }
+                                echo '<td><a href="' . urldecode($row['ruta']) . '"><span class="icon-download-cloud"></span></a></td>';
+                                echo '</tr>';
                             }
-                            
-                            //echo '<td>' . $row['ruta'] . '</td>';
-                            echo '<td><a href="pro_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
-                            if ($id_usuario == $row['id_usuario']) {
-                                echo '<td><a href="Profesor_actualizar_Recur.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
-                                //echo '<td><a onClick=\"javascript: return confirm("Please confirm deletion");\" href="pro_buscar.php?id=' . $row['idobjeto_aprendizaje'] . '&idborrar=2"> <span class="glyphicon glyphicon-remove"> </a></td>';
-                                echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='pro_buscar.php?id=" . $row['idobjeto_aprendizaje'] . "&idborrar=2'><span class='glyphicon glyphicon-remove'></a></td>";
-                            } else {
-                                echo '<td>----</td>';
-                                echo '<td>----</td>';
-                            }
-                            echo '<td><a href="' . urldecode($row['ruta']) . '"><span class="icon-download-cloud"></span></a></td>';
-                            echo '</tr>';
                         }
+                        echo '</table>';
                     }
-                    echo '</table>';
+
+                    if($repo == "PUB"){
+                        echo '<table border ="1|1" class="table table-condensed";>';
+                        echo '<tr class="warning">';
+                        echo '<td>Autor</td>';
+                        echo '<td>Nombre</td>';
+                        echo '<td>Descripción</td>';
+                        echo '<td>Institucion</td>';
+                        echo '<td>FechaCreacion</td>';
+                        echo '<td>Comentarios</td>';
+                        echo "<td>Descargar</td>";
+                        echo "</tr>";
+
+                        if ($consulta->rowCount() != 0) {
+                            while ($row = $consulta->fetch()) {
+                                echo '<tr class="success">';
+                                if (obtener_tipo_usuario_con_id($row['id_usuario']) == 'ADM') {
+                                    echo '<td>ADMINISTRADOR</td>';
+                                } else {
+                                    $profesor = obtener_profesor_como_arreglo(obtener_id_profesor_con_id_usuario($row['id_usuario']));
+                                    echo '<td>' . $profesor['nombres'] . ' ' . $profesor['apellidos'] . '</td>';
+                                }
+                                echo '<td>' . $row['nombre'] . '</td>';
+                                echo '<td>' . $row['descripcion'] . '</td>';
+                                echo '<td>' . $row['institucion'] . '</td>';
+                                echo '<td>' . $row['fechaCreacion'] . '</td>';
+                                echo '<td><a href="pro_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
+                                echo '<td><a href="' . urldecode($row['ruta']) . '"><span class="icon-download-cloud"></span></a></td>';
+                                echo '</tr>';
+                            }
+                        }
+                        echo '</table>';
+                    }
+
                     extract($_GET);
                     if (@$idborrar == 2) {
                         eliminar_objeto_aprendizaje($id);

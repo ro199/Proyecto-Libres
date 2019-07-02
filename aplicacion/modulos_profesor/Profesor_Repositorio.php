@@ -65,6 +65,9 @@ if (@!$_SESSION['usuario']) {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
+                                        <select name="Privado" dir="ltr">
+                                            <option value="PRI"></option>
+                                        </select>
                                     </div>
                                     <div class="col-md-3 text-left">
                                         <button id="registrar" type="submit" class="btn btn-success">Buscar</button>
@@ -88,10 +91,12 @@ if (@!$_SESSION['usuario']) {
                                         <td>Descripción</td>
                                         <td>Institución</td>
                                         <td>Fecha Creación</td>
+                                        <td>Comentarios</td>
                                         <td>Actualizar</td>
                                         <td>Eliminar</td>
                                         <td>Descargar</td>
                                         <td>Publicar</td>
+                                        <td>Estado</td>
                                     </tr>
                                     </thead>
                             </div>
@@ -102,7 +107,7 @@ if (@!$_SESSION['usuario']) {
                             require '../clases_negocio/funciones_oa_estudiante.php';
 
                             $id_usuario = $_SESSION['id'];
-                            $statement = 'select * from objeto_aprendizaje where id_usuario ="' . $_SESSION['id'] . '"and tipo_repo = 1 and Publicacion= "PRI"';
+                            $statement = 'select * from objeto_aprendizaje where id_usuario ="' . $_SESSION['id'] . '"and tipo_repo = 1 and Privado= "SI"';
                             $conexion = new Conexion();
                             $consulta = $conexion->prepare($statement);
                             $consulta->setFetchMode(PDO::FETCH_ASSOC);
@@ -117,10 +122,11 @@ if (@!$_SESSION['usuario']) {
                                     echo '<td>' . $row['descripcion'] . '</td>';
                                     echo '<td>' . $row['institucion'] . '</td>';
                                     echo '<td>' . $row['fechaCreacion'] . '</td>';
+                                    echo '<td><a href="pro_comentarios.php?id=' . $row['idobjeto_aprendizaje'] . '">' . obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) . '</a></td>';
 
                                     if ($id_usuario == $row['id_usuario']) {
                                         echo '<td><a href="Profesor_actualizar_Recur.php?id=' . $row['idobjeto_aprendizaje'] . '"><span class="glyphicon glyphicon-refresh"></a></td>';
-                                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='pro_buscar_privado.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
+                                        echo "<td><a onClick=\"javascript: return confirm('Realmente desea eliminar el objeto de aprendizaje?');\" href='Profesor_Repositorio.php?id=".$row['idobjeto_aprendizaje']."&idborrar=2'><span class='glyphicon glyphicon-trash'></a></td>";
                                     } else {
                                         echo '<td>----</td>';
                                         echo '<td>----</td>';
