@@ -50,7 +50,7 @@ if ($consulta->rowCount() != 0) {
                         $_SESSION['id'] = $fila['idUsuario'];
                         $_SESSION['usuario'] = $fila['usuario'];
                         $_SESSION['tipo_usuario'] = $fila['tipo_usuario'];
-                        echo "<script>location.href='../aplicacion/modulos_profesor/Profesor.php'</script>"; 
+                        echo "<script>location.href='../aplicacion/modulos_profesor/pro_buscar_privado.php'</script>"; 
                     } else {
                         echo '<script>alert("Nuevo usuario. Debe cambiar la clave")</script> ';
                         echo "<script>location.href='../aplicacion/formularios_registro/Recuperar_Contrasenia.html'</script>";
@@ -76,7 +76,7 @@ if ($consulta->rowCount() != 0) {
                         $_SESSION['id'] = $fila['idUsuario'];
                         $_SESSION['usuario'] = $fila['usuario'];
                         $_SESSION['tipo_usuario'] = $fila['tipo_usuario'];
-                        echo "<script>location.href='../aplicacion/modulos_profesor/Profesor.php'</script>";
+                        echo "<script>location.href='../aplicacion/modulos_profesor/pro_buscar_privado.php'</script>";
                     } else {
                         echo '<script>alert("Nuevo usuario. Debe cambiar la clave")</script> ';
                         echo "<script>location.href='../aplicacion/formularios_registro/Recuperar_Contrasenia.html'</script>";

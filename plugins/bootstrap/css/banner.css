@@ -1,9 +1,9 @@
 #banner {
-    margin-top: 80px;
+    margin-top: 70px;
     position: relative;
 }
 
-#banner .banner-id img {
+#banner img {
     width: 100%;
     height: 100%;
 }
@@ -19,15 +19,4 @@
 
 #banner h2 {
     font-size: 28px;
-}
-
-@media (min-width:1024px){
-    #banner .banner-id img {
-        width: 85%;
-        height: 80%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        
-    }
 }

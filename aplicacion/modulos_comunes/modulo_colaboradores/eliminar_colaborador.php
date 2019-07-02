@@ -1,11 +1,11 @@
 <?php
-
 session_start();
 if (@!$_SESSION['usuario']) {
-    header("Location:../../index.php");
+    header("Location:../../../index.php");
 } elseif ($_SESSION['tipo_usuario'] == 'EST') {
-//header("Location:index2.php");
+    header("Location:../../../index.php");
 } elseif ($_SESSION['tipo_usuario'] == 'ADM') {
+    
 }
    
     
@@ -27,17 +27,14 @@ if (@!$_SESSION['usuario']) {
         margin-bottom: 0;
         border-radius: 0;
     }
-
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 390px}
-
     /* Set gray background color and 100% height */
     .sidenav {
         padding-top: 20px;
         background-color: #f1f1f1;
         height: 100%;
     }
-
     html{
         min-height: 100%;
         position: relative;
@@ -57,7 +54,6 @@ if (@!$_SESSION['usuario']) {
         padding-top:5px;
     padding-bottom:5px;
     }
-
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
         .sidenav {
@@ -66,18 +62,15 @@ if (@!$_SESSION['usuario']) {
         }
         .row.content {height:auto;}
     }
-
     .table > tbody > tr > td {
         vertical-align: middle;
     }
-
        .estadistica{
         -webkit-column-count: 3; /* Chrome, Safari, Opera */
         -moz-column-count: 3; /* Firefox */
         column-count: 2;
         
     }
-
 </style>
 
 
@@ -98,17 +91,14 @@ if (@!$_SESSION['usuario']) {
         margin-bottom: 0;
         border-radius: 0;
     }
-
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 390px}
-
     /* Set gray background color and 100% height */
     .sidenav {
         padding-top: 20px;
         background-color: #f1f1f1;
         height: 100%;
     }
-
     html{
         min-height: 100%;
         position: relative;
@@ -128,7 +118,6 @@ if (@!$_SESSION['usuario']) {
         padding-top:5px;
     padding-bottom:5px;
     }
-
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
         .sidenav {
@@ -137,25 +126,94 @@ if (@!$_SESSION['usuario']) {
         }
         .row.content {height:auto;}
     }
-
     .table > tbody > tr > td {
         vertical-align: middle;
     }
-
        .estadistica{
         -webkit-column-count: 3; /* Chrome, Safari, Opera */
         -moz-column-count: 3; /* Firefox */
         column-count: 2;
         
     }
-
 </style>
 
 
 <body>
 
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Bienvenid@: <strong><?php echo $_SESSION['usuario']?></strong></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetos de aprendizaje
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../modulos_administrador/adm_objetos_aprendizaje.php">Importar y catalogar objetos de aprendizaje</a></li>
+                        <li><a href="../../modulos_administrador/adm_buscar.php">Buscar y administrar objetos de aprendizaje</a></li>
+                    </ul>
+                </li>
+                <li><a href="../../modulos_administrador/adm_buscar_profesores.php">Gestionar Profesores</a></li>
+                <li ><a href="../../modulos_administrador/adm_buscar_estudiantes.php">Gestionar Estudiantes</a></li>
+                <li ><a href="../../modulos_administrador/adm_comentarios_todos.php">Gestionar comentarios</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestión de colaboradores
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="buscar_colaborador.php">Buscar</a></li>
+                        <li><a href="eliminar_colaborador.php">Eliminar</a></li>
+                    </ul>
+                </li>
+                <li><a href="../../modulos_administrador/adm_herramientas.php">Herramientas</a></li>
+                <li ><a href="../modulo_foro/index.php">Foro</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../../../aplicacion/desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <?php 
-    require '../../clases_negocio/clase_conexion.php';
+
+
+
+/* Los datos cédula de identidad, nombres y apellidos, fecha de nacimiento, género, 
+dirección de domicilio, telefono convencional, telefono celular y correo electrónico
+se encuentran entre la tabla usuario, la tabla estudiante o profesor segun corresponda
+y la tabla colaboradores.
+
+
+Se deben desplegar todos los campos de cada colaborador indicados arriba (el numero total
+de colaboraciones por cada uno)(como en el archivo "modulos_administrador/adm_buscar.php")
+en una tabla como en el archivo index.php del modulo foro.
+
+En esta tabla debe existir un boton de eliminar por cada colaborador. Si se da click, se debe
+actualizar el campo "activo" de la tabla colaborador a "F" (falso).
+
+NO SE DEBEN BORRAR Y/O ACTUALIZAR NINGUN OTRO DATO.
+
+Debe tener la opción de buscar por: apellido o cédula.
+
+
+*/
+
+
+?>
+
+
+<body>
+
+<?php 
+    require_once '../../clases_negocio/clase_conexion.php';
+
     $conexion = new Conexion();
     $statement = "SELECT count(*), colaborador.activo FROM colaborador JOIN usuario ON (colaborador.idUsuario=usuario.idUsuario) 
             WHERE usuario.idUsuario =".$_SESSION['id'];
@@ -166,105 +224,24 @@ if (@!$_SESSION['usuario']) {
     $activo = $row['activo'];
     $numero = $row['count(*)'];
     
-if ($_SESSION['tipo_usuario'] == 'ADM' ){
-   
-   echo '<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>                        
-            </button>
-            <a class="navbar-brand" href="#">Bienvenid@: <strong>'.$_SESSION['usuario'].'</strong></a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Repositorios
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../../modulos_administrador/adm_objetos_aprendizaje.php">Repositorio público</a></li>
-                        <li><a href="../../modulos_administrador/adm_buscar.php">Repositorio privado</a></li>
-                    </ul>
-                </li>
-                <li><a href="../../modulos_administrador/adm_buscar_profesores.php">Gestionar Profesores</a></li>
-                <li ><a href="../../modulos_administrador/adm_buscar_estudiantes.php">Gestionar Estudiantes</a></li>
-                <li ><a href="../../modulos_administrador/adm_comentarios_todos.php">Gestionar comentarios</a></li>
-                <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestionar colaboradores
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="../modulos_comunes/modulo_colaboradores/buscar_colaborador.php">Buscar</a></li>
-                    <li><a href="../modulos_comunes/modulo_colaboradores/eliminar_colaborador.php">Eliminar</a></li>
-                </ul>
-            </li>
-                
-                <li class="active"><a href="index.php">Foro</a></li>
-                
-                
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../../../aplicacion/desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>';
-   
-  
-   
-}else{
 
-    echo '<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Bienvenid@: <strong>'.$_SESSION['usuario'].'</strong></a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Repositorios
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../../modulos_profesor/pro_buscar.php">Repositorio público</a></li>
-                        <li><a href="../../modulos_profesor/pro_buscar_privado.php">Repositorio privado</a></li>
-                    </ul>
-                </li>
-                <li class="active"><a href="index.php">Foro</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../../desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-            </ul>
-        </div>
-    </div>
- </nav>';
-    
-}
 ?>
-<!-- Inicio formulario de búsqueda -->
 
-<!-- presentacion de objetos de aprendizaje-->
 <div class="container-fluid text-center">
     <div class="row content">
     <div class="col-sm-12 text-center"> 
-                    <h2>FORO DE COMENTARIOS</h2>
-            <form action="index.php" method="post" enctype="multipart/form-data">
+                    <h2>ELIMINAR COLABORADORES</h2>
+
+                    <form action="eliminar_colaborador.php" method="post" enctype="multipart/form-data">
                     <div class="col-md-3">
                         </div>            
                         <div class="col-md-3 text-left ">
                             <select class= "form-control" name="tipo_criterio" dir="ltr" required>
                                 <option value="">Filtrar por:</option>
-                                <option value="autor">Autor</option>
-                                <option value="titulo">Título</option>
+                                <option value="apellido">Apellido</option>
+                                <option value="cedula">Cédula</option>
                             </select><br>
                         </div>
-                    <!--<input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>-->
-               
                     <div class="col-md-3 text-center">
                             <input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>
                         </div>
@@ -274,68 +251,116 @@ if ($_SESSION['tipo_usuario'] == 'ADM' ){
                 </div>
 
             </form>
-
+            
             <div class="container" >
                 <table class="table table-striped" border="1|1" class="table table-bordered" id="tabla">
                     <thead>
                     <tr class="warning">
-                        <td>Usuario</td>
-                        <td>Titulo</td>
-                        <td>Fecha</td>
-                        <td>Número de respuestas</td>
+                        <td>Nombre Completo</td>
+                        <td>Cédula de identidad</td>
+                        <td>Fecha de nacimiento</td>
+                       <!-- <td>Género</td> -->
+                        <td>Dirección de domicilio</td>
+                        <td>Teléfono convencional</td>
+                        <td>Teléfono celular</td>
+                        <td>Correo electrónico</td>
+                        <td>Colaboraciones</td>
 					</tr>
 					</thead>
             </div>
 <?php 
-	
-	
 
-	$idLogin = $_SESSION['id'];
+    require '../../clases_negocio/funciones_administrador.php';
+    $idLogin = $_SESSION['id'];
 	$nombre = $_SESSION['usuario'];
 
-	$conexion = new Conexion();
-    $statement = "SELECT * FROM foro JOIN usuario ON (foro.idUsuario=usuario.idUsuario) WHERE foro.identificador = 0";
+    $conexion = new Conexion();
+    $statement = "SELECT estudiante.id_usuario, estudiante.ci, estudiante.nombres, estudiante.apellidos, estudiante.mail, estudiante.domicilio, estudiante.celular, estudiante.convencional, estudiante.genero, estudiante.fecha_nacimiento, colaborador.colaboraciones, colaborador.idColaborador, colaborador.activo
+    FROM estudiante JOIN colaborador
+    on estudiante.id_usuario=colaborador.idUsuario
+    UNION
+    SELECT profesor.id_usuario, profesor.ci, profesor.nombres, profesor.apellidos, profesor.mail, profesor.domicilio, profesor.celular, profesor.convencional, profesor.genero, profesor.fecha_nacimiento, colaborador.colaboraciones, colaborador.idColaborador, colaborador.activo
+    FROM profesor JOIN colaborador
+    on profesor.id_usuario=colaborador.idUsuario";
     
     $criterio = filter_input(INPUT_POST, 'tipo_criterio');
     $valor_criterio = filter_input(INPUT_POST, 'criterio_busqueda');
     
     $clausula_where = " ";
         switch ($criterio) {
-            case 'autor':
-                $clausula_where = ' and usuario like "%' . $valor_criterio . '%" order by usuario';
+            case 'apellido':
+                $clausula_where = ' and apellidos like "%' . $valor_criterio . '%" order by apellidos';
                 $statement = $statement . $clausula_where;
                 break;
-            case 'titulo':
-                $clausula_where = ' and titulo like "%' . $valor_criterio . '%" order by titulo';
+            case 'cedula':
+                $clausula_where = ' and ci like "%' . $valor_criterio . '%" order by ci';
                 $statement = $statement . $clausula_where;
-                
                 break;
         }
     
     $consulta = $conexion->prepare($statement);
 	$consulta->setFetchMode(PDO::FETCH_ASSOC);
-	$consulta->execute();
+    $consulta->execute();
     
+
+    if ($consulta->rowCount() != 0) {
 	while($row = $consulta->fetch()){
-		$id = $row['idForo'];
-		$usuario = $row['usuario'];
-		$titulo = $row['titulo'];
-		$fecha = $row['fecha'];
-		$respuestas = $row['respuestas'];
-		echo "<tr>";
+		$id = $row['idColaborador'];
+        $usuario = $row['nombres'] . '  ' . $row['apellidos'] ;
+		$cedula = $row['ci'];
+        $fecha = $row['fecha_nacimiento'];
+        //$genero= $row['genero'];
+        $direccion = $row['domicilio'];
+        //$Tel_convencional= $row['convencional'];
+        $Tel_celular= $row['celular'];
+        $correo= $row['mail'];
+        $colaboraciones= $row['colaboraciones'];
+        $activo=$row['activo'];
+
+        echo "<tr>";
 			echo "<td>$usuario </td>";
-			echo "<td>$titulo</td>";
-			echo "<td>".date("d-m-y,$fecha")."</td>";
-			echo "<td>$respuestas</td>";
-			echo "<td><a href= foro.php?id=".$id.">Revisar tema</a></td>";
+			echo "<td>$cedula</td>";
+            echo "<td>$fecha</td>";
+            //echo "<td>$genero</td>";
+            echo "<td>$direccion</td>";
+          //  echo "<td>$Tel_convencional</td>";
+            echo "<td>$Tel_celular</td>";
+            echo "<td>$correo</td>";
+            echo "<td>$colaboraciones</td>";
+            echo "<td>$activo</td>";
+            if ($row['activo'] == 'V') {
+                echo '<td><a href="eliminar_colaborador.php?id=' . $row['idColaborador'] . '&id_gestion=1">Desactivar</a></td>';
+            } else {
+                echo '<td><a href="eliminar_colaborador.php?id=' . $row['idColaborador'] . '&id_gestion=2">Activar</a></td>';
+            }
 		echo "</tr>";
-	}
+    }
+}
+
+
+    echo '</table>';
+    $id_gestion = filter_input(INPUT_GET, 'id_gestion');
+    $id = filter_input(INPUT_GET, 'id');
+    if ($id_gestion == 1) {
+     act_des_colaborador ($id, "F");
+        echo '<script>alert("Colaborador desactivado correctamente")</script> ';
+        echo "<script>location.href='eliminar_colaborador.php'</script>";
+          }
+   if ($id_gestion == 2) {
+    act_des_colaborador($id, "V");
+        echo '<script>alert("Colaborador activado correctamente")</script> ';
+          echo "<script>location.href='eliminar_colaborador.php'</script>";
+        }
+        
+    $conexion = null;
+
 ?>
 </table>
 <br>
 <br>
-<?php echo "<button onclick=\"location.href='formulario.php'\">INSERTAR NUEVO TEMA</td>"; ?>
+
+</body>
+
 
 </body>
 </html>
-
