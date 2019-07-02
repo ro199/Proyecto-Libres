@@ -1,6 +1,0 @@
-http://www.zeusappsmobile.com/guia-programacion-ios/viper-clean-architecture/
-https://www2.deloitte.com/es/es/pages/technology/articles/clean-architecture.html
-https://si.ua.es/es/documentacion/asp-net-mvc-3/1-dia/modelo-vista-controlador-mvc.html
-https://openwebinars.net/blog/la-arquitectura-mvvm-y-sus-componentes/
-https://devexperto.com/mvvm-vs-mvp/
-https://antonioleiva.com/mvp-android/
