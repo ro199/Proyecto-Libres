@@ -150,7 +150,7 @@ if (@!$_SESSION['usuario']) {
 </style>
 
 
-<body>
+<body style="background-color:#00aae4;">
 <?php if ($_SESSION['tipo_usuario'] == 'ADM' ){
    
    echo '<nav class="navbar navbar-default">
@@ -159,7 +159,7 @@ if (@!$_SESSION['usuario']) {
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>                        
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">Bienvenid@: <strong>'.$_SESSION['usuario'].'</strong></a>
         </div>
@@ -217,119 +217,124 @@ if (@!$_SESSION['usuario']) {
     
 }
 ?>
-<!-- Inicio formulario de búsqueda -->
+<main>
+    <section id="banner_pr">
+        <!-- Inicio formulario de búsqueda -->
 
-<!-- presentacion de objetos de aprendizaje-->
-<div class="container-fluid text-center">
-    <div class="row content">
-        <!-- --------------------------------------------- -->
-                <div class="col-md-3 text-center">
-                    <!--<input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>-->
-                </div>
-                <div class="col-md-3 text-left">
-                    <br><br>
-                </div>
+        <!-- presentacion de objetos de aprendizaje-->
+        <div class="container-fluid text-center">
+            <div class="row content">
+                <!-- --------------------------------------------- -->
+                        <div class="col-md-3 text-center">
+                            <!--<input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>-->
+                        </div>
+                        <div class="col-md-3 text-left">
+                            <br><br>
+                        </div>
 
-            </form>
+                    </form>
 
-<?php
-    require '../../clases_negocio/clase_conexion.php';
-    
-    if(isset($_GET["id"]))
-    $id = $_GET['id'];
-    
-    $idLogin = $_SESSION['id'];
-    $nombre = $_SESSION['usuario'];
-
-    $conexion = new Conexion();
-    $query = "SELECT * FROM  foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE idForo = '$id' ORDER BY fecha DESC";
-    $consulta = $conexion->prepare($query);
-    $consulta->setFetchMode(PDO::FETCH_ASSOC);
-    $consulta->execute();
-
-    echo "  <div class=\"container\">";
-    
-    while($row = $consulta->fetch()){
-        $id = $row['idForo'];
-        $titulo = $row['titulo'];
-        $mensaje = $row['mensaje'];
-        $fecha = $row['fecha'];
-        $respuestas = $row['respuestas'];
-        $imagen = $row['imagen'];
-        $video = $row['video'];
+        <?php
+            require '../../clases_negocio/clase_conexion.php';
             
-        echo " <table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
-                    <thead>
-                    <tr class=\"success\">
-                     <th> Titulo</th><td>".$titulo."</td></tr>
-                     <tr  class=\"success\"><th> Mensaje</th><td>".$mensaje."</td></tr>";
-        if ($imagen!=''){
-            echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></td></tr>";
-            }
-            if ($video!=''){
-                echo "<tr  class=\"warning\"><th> Video </th><td>
-                    <video width=\"500\" controls>
-                    <source src=\"".$video."\" type=\"video/mp4\">
-                      Your browser does not support HTML5 video.
-                    </video>
-
-                    ";
-                }
-        echo "<tr ><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>
-                     </thead>
-                     </table>";
-        }
-         echo "</div>";
-    
-    $query2 = "SELECT * FROM foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE identificador = '$id' ORDER BY fecha DESC";
-    $consulta = $conexion->prepare($query2);
-    //$consulta->setFetchMode(PDO::FETCH_ASSO);
-    $consulta->execute();
-
-    echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
-            <thead>
-            <tr class=\"success\"><br><H3>RESPUESTAS</H3><br><br></tr>
-            </thead>
-            </table>
+            if(isset($_GET["id"]))
+            $id = $_GET['id'];
             
-            <div class=\"container\" >
-            ";
+            $idLogin = $_SESSION['id'];
+            $nombre = $_SESSION['usuario'];
 
-    while($row = $consulta->fetch()){
-        $id = $row['idForo'];
-        $autor = $row['usuario'];
-        $titulo = $row['titulo'];
-        $mensaje = $row['mensaje'];
-        $fecha = $row['fecha'];
-        $respuestas = $row['respuestas'];
-        $imagen = $row['imagen'];
-        $video = $row['video'];
-        
-        echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
-                <thead>
-                <tr  class=\"warning\"><th> Titulo</th><td>".$titulo."</td></tr>
-                <tr  class=\"warning\"><th> Mensaje</th><td>".$mensaje."</td></tr>
-                <tr  class=\"warning\"><th> Autor</th><td>".$autor."</td></tr>
-                <tr  class=\"warning\"><th> Fecha</th><td>".$fecha."</td></tr>";
+            $conexion = new Conexion();
+            $query = "SELECT * FROM  foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE idForo = '$id' ORDER BY fecha DESC";
+            $consulta = $conexion->prepare($query);
+            $consulta->setFetchMode(PDO::FETCH_ASSOC);
+            $consulta->execute();
+
+            echo "  <div class=\"container\">";
+            
+            while($row = $consulta->fetch()){
+                $id = $row['idForo'];
+                $titulo = $row['titulo'];
+                $mensaje = $row['mensaje'];
+                $fecha = $row['fecha'];
+                $respuestas = $row['respuestas'];
+                $imagen = $row['imagen'];
+                $video = $row['video'];
+                    
+                echo " <table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
+                            <thead>
+                            <tr class=\"success\">
+                             <th> Titulo</th><td>".$titulo."</td></tr>
+                             <tr  class=\"success\"><th> Mensaje</th><td>".$mensaje."</td></tr>";
                 if ($imagen!=''){
-                    echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></img></td></tr>";
-                }
-                if ($video!=''){
-                    echo "<tr  class=\"warning\"><th> Video </th><td>
-                        <video width=\"500\" controls>
-                        <source src=\"".$video."\" type=\"video/mp4\">
-                          Your browser does not support HTML5 video.
-                        </video>
-    
-                        ";
+                    echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></td></tr>";
                     }
-                
-            /// echo "<tr><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>";
-            echo "</table>";
-    }
+                    if ($video!=''){
+                        echo "<tr  class=\"warning\"><th> Video </th><td>
+                            <video width=\"500\" controls>
+                            <source src=\"".$video."\" type=\"video/mp4\">
+                              Your browser does not support HTML5 video.
+                            </video>
 
-    echo "<td><button onclick=\"location.href='index.php'\">REGRESAR</td>";
-?>
+                            ";
+                        }
+                echo "<tr ><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>
+                             </thead>
+                             </table>";
+                }
+                 echo "</div>";
+            
+            $query2 = "SELECT * FROM foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE identificador = '$id' ORDER BY fecha DESC";
+            $consulta = $conexion->prepare($query2);
+            //$consulta->setFetchMode(PDO::FETCH_ASSO);
+            $consulta->execute();
+
+            echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
+                    <thead>
+                    <tr class=\"success\"><br><H3>RESPUESTAS</H3><br><br></tr>
+                    </thead>
+                    </table>
+                    
+                    <div class=\"container\" >
+                    ";
+
+            while($row = $consulta->fetch()){
+                $id = $row['idForo'];
+                $autor = $row['usuario'];
+                $titulo = $row['titulo'];
+                $mensaje = $row['mensaje'];
+                $fecha = $row['fecha'];
+                $respuestas = $row['respuestas'];
+                $imagen = $row['imagen'];
+                $video = $row['video'];
+                
+                echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
+                        <thead>
+                        <tr  class=\"warning\"><th> Titulo</th><td>".$titulo."</td></tr>
+                        <tr  class=\"warning\"><th> Mensaje</th><td>".$mensaje."</td></tr>
+                        <tr  class=\"warning\"><th> Autor</th><td>".$autor."</td></tr>
+                        <tr  class=\"warning\"><th> Fecha</th><td>".$fecha."</td></tr>";
+                        if ($imagen!=''){
+                            echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></img></td></tr>";
+                        }
+                        if ($video!=''){
+                            echo "<tr  class=\"warning\"><th> Video </th><td>
+                                <video width=\"500\" controls>
+                                <source src=\"".$video."\" type=\"video/mp4\">
+                                  Your browser does not support HTML5 video.
+                                </video>
+            
+                                ";
+                            }
+                        
+                    /// echo "<tr><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>";
+                    echo "</table>";
+            }
+
+            echo "<td><button onclick=\"location.href='index.php'\">REGRESAR</td>";
+        ?>
+    </section>
+</main>
+
 
 
 </body>
