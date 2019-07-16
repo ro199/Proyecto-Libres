@@ -78,7 +78,7 @@ if (@!$_SESSION['usuario']) {
 </style>
 
 
-<body style="background-color:#00aae4;">
+<body>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 <head>
@@ -87,7 +87,9 @@ if (@!$_SESSION['usuario']) {
     <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
     <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
-    <title>Proyecto SGOA</title>
+    <link rel="stylesheet" href="../../../plugins/bootstrap/css/Profesor.css" />
+    <link rel="stylesheet" href="../../../css/fontello.css">
+    <title>Foro</title>
 </head>
 <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -143,13 +145,12 @@ if (@!$_SESSION['usuario']) {
         -webkit-column-count: 3; /* Chrome, Safari, Opera */
         -moz-column-count: 3; /* Firefox */
         column-count: 2;
-        
     }
 
 </style>
 
 
-<body>
+<body style="background-color:#00aae4;">
 <?php if ($_SESSION['tipo_usuario'] == 'ADM' ){
    
    echo '<nav class="navbar navbar-default">
@@ -158,7 +159,7 @@ if (@!$_SESSION['usuario']) {
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>                        
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">Bienvenid@: <strong>'.$_SESSION['usuario'].'</strong></a>
         </div>
@@ -199,149 +200,141 @@ if (@!$_SESSION['usuario']) {
    
 }else{
 
-    echo '<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Bienvenid@: <strong>'.$_SESSION['usuario'].'</strong></a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="../../modulos_profesor/pro_importar_catalogar.php">Importar y catalogar</a></li>
-                <li><a href="../../modulos_profesor/pro_buscar.php">Buscar</a></li>
-                <li><a href="../../modulos_profesor/pro_herramientas.php">Herramientas</a></li>
-                <li class="active"><a href="index.php">Foro</a></li>
-                          </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../../desconectar_sesion.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-            </ul>
-        </div>
-    </div>
- </nav>';
+    echo '<header>
+           <div class="Menu-Vertical">
+              <h1>Usuario:'.$_SESSION['usuario'].'</h1>
+              <input type="checkbox" id="menu-bar">
+              <label class="icon-menu" for="menu-bar"></label>
+              <nav class="menu">
+                   <a href="../../modulos_profesor/Profesor_Cargar_Recur.php">Cargar un Recurso</a>
+                   <a href="../../modulos_profesor/Profesor_Repositorio.php">Repositorio Privado</a>
+                   <a href="../../modulos_profesor/Profesor_Repositorio_Pub.php">Repositorio Público</a>
+                   <a href="../../modulos_comunes/modulo_foro/index.php">Foro</a>
+                   <a href="../../desconectar_sesion.php">Salir</a>
+               </nav>
+           </div>
+       </header>';
     
 }
 ?>
-<!-- Inicio formulario de búsqueda -->
+<main>
+    <section id="banner_pr">
+        <!-- Inicio formulario de búsqueda -->
 
-<!-- presentacion de objetos de aprendizaje-->
-<div class="container-fluid text-center">
-    <div class="row content">
-        <!-- --------------------------------------------- -->
-                <div class="col-md-3 text-center">
-                    <!--<input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>-->
-                </div>
-                <div class="col-md-3 text-left">
-                    <br><br>
-                </div>
+        <!-- presentacion de objetos de aprendizaje-->
+        <div class="container-fluid text-center">
+            <div class="row content">
+                <!-- --------------------------------------------- -->
+                        <div class="col-md-3 text-center">
+                            <!--<input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>-->
+                        </div>
+                        <div class="col-md-3 text-left">
+                            <br><br>
+                        </div>
 
-            </form>
+                    </form>
 
+        <?php
+            require '../../clases_negocio/clase_conexion.php';
             
-                
-                        
-
-<?php
-	require '../../clases_negocio/clase_conexion.php';
-	
-	if(isset($_GET["id"]))
-	$id = $_GET['id'];
-    
-	$idLogin = $_SESSION['id'];
-	$nombre = $_SESSION['usuario'];
-
-	$conexion = new Conexion();
-	$query = "SELECT * FROM  foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE idForo = '$id' ORDER BY fecha DESC";
-    $consulta = $conexion->prepare($query);
-	$consulta->setFetchMode(PDO::FETCH_ASSOC);
-    $consulta->execute();
-
-    echo "  <div class=\"container\">";
-	
-	while($row = $consulta->fetch()){
-		$id = $row['idForo'];
-		$titulo = $row['titulo'];
-		$mensaje = $row['mensaje'];
-		$fecha = $row['fecha'];
-        $respuestas = $row['respuestas'];
-        $imagen = $row['imagen'];
-        $video = $row['video'];
-			
-        echo " <table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
-                    <thead>
-                    <tr class=\"success\">
-                     <th> Titulo</th><td>".$titulo."</td></tr>
-                     <tr  class=\"success\"><th> Mensaje</th><td>".$mensaje."</td></tr>";
-        if ($imagen!=''){
-            echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></td></tr>";
-            }
-            if ($video!=''){
-                echo "<tr  class=\"warning\"><th> Video </th><td>
-                    <video width=\"500\" controls>
-                    <source src=\"".$video."\" type=\"video/mp4\">
-                      Your browser does not support HTML5 video.
-                    </video>
-
-                    ";
-                }
-        echo "<tr ><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>
-                     </thead>
-                     </table>";
-        }
-         echo "</div>";
-	
-	$query2 = "SELECT * FROM foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE identificador = '$id' ORDER BY fecha DESC";
-	$consulta = $conexion->prepare($query2);
-	//$consulta->setFetchMode(PDO::FETCH_ASSO);
-	$consulta->execute();
-
-	echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
-            <thead>
-            <tr class=\"success\"><br><H3>RESPUESTAS</H3><br><br></tr>
-            </thead>
-            </table>
+            if(isset($_GET["id"]))
+            $id = $_GET['id'];
             
-            <div class=\"container\" >
-            ";
+            $idLogin = $_SESSION['id'];
+            $nombre = $_SESSION['usuario'];
 
-	while($row = $consulta->fetch()){
-        $id = $row['idForo'];
-        $autor = $row['usuario'];
-		$titulo = $row['titulo'];
-		$mensaje = $row['mensaje'];
-		$fecha = $row['fecha'];
-        $respuestas = $row['respuestas'];
-        $imagen = $row['imagen'];
-        $video = $row['video'];
-        
-        echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
-                <thead>
-                <tr  class=\"warning\"><th> Titulo</th><td>".$titulo."</td></tr>
-                <tr  class=\"warning\"><th> Mensaje</th><td>".$mensaje."</td></tr>
-                <tr  class=\"warning\"><th> Autor</th><td>".$autor."</td></tr>
-                <tr  class=\"warning\"><th> Fecha</th><td>".$fecha."</td></tr>";
+            $conexion = new Conexion();
+            $query = "SELECT * FROM  foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE idForo = '$id' ORDER BY fecha DESC";
+            $consulta = $conexion->prepare($query);
+            $consulta->setFetchMode(PDO::FETCH_ASSOC);
+            $consulta->execute();
+
+            echo "  <div class=\"container\">";
+            
+            while($row = $consulta->fetch()){
+                $id = $row['idForo'];
+                $titulo = $row['titulo'];
+                $mensaje = $row['mensaje'];
+                $fecha = $row['fecha'];
+                $respuestas = $row['respuestas'];
+                $imagen = $row['imagen'];
+                $video = $row['video'];
+                    
+                echo " <table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
+                            <thead>
+                            <tr class=\"success\">
+                             <th> Titulo</th><td>".$titulo."</td></tr>
+                             <tr  class=\"success\"><th> Mensaje</th><td>".$mensaje."</td></tr>";
                 if ($imagen!=''){
-                    echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></img></td></tr>";
-                }
-                if ($video!=''){
-                    echo "<tr  class=\"warning\"><th> Video </th><td>
-                        <video width=\"500\" controls>
-                        <source src=\"".$video."\" type=\"video/mp4\">
-                          Your browser does not support HTML5 video.
-                        </video>
-    
-                        ";
+                    echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></td></tr>";
                     }
-                
-            /// echo "<tr><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>";
-		    echo "</table>";
-	}
+                    if ($video!=''){
+                        echo "<tr  class=\"warning\"><th> Video </th><td>
+                            <video width=\"500\" controls>
+                            <source src=\"".$video."\" type=\"video/mp4\">
+                              Your browser does not support HTML5 video.
+                            </video>
 
-	echo "<td><button onclick=\"location.href='index.php'\">REGRESAR</td>";
-?>
+                            ";
+                        }
+                echo "<tr ><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>
+                             </thead>
+                             </table>";
+                }
+                 echo "</div>";
+            
+            $query2 = "SELECT * FROM foro join usuario on (foro.idUsuario=usuario.idUsuario) WHERE identificador = '$id' ORDER BY fecha DESC";
+            $consulta = $conexion->prepare($query2);
+            //$consulta->setFetchMode(PDO::FETCH_ASSO);
+            $consulta->execute();
+
+            echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
+                    <thead>
+                    <tr class=\"success\"><br><H3>RESPUESTAS</H3><br><br></tr>
+                    </thead>
+                    </table>
+                    
+                    <div class=\"container\" >
+                    ";
+
+            while($row = $consulta->fetch()){
+                $id = $row['idForo'];
+                $autor = $row['usuario'];
+                $titulo = $row['titulo'];
+                $mensaje = $row['mensaje'];
+                $fecha = $row['fecha'];
+                $respuestas = $row['respuestas'];
+                $imagen = $row['imagen'];
+                $video = $row['video'];
+                
+                echo "<table class=\"table table-striped\" border =\"1|1\" class=\"table table-bordered\" id=\"tabla\">
+                        <thead>
+                        <tr  class=\"warning\"><th> Titulo</th><td>".$titulo."</td></tr>
+                        <tr  class=\"warning\"><th> Mensaje</th><td>".$mensaje."</td></tr>
+                        <tr  class=\"warning\"><th> Autor</th><td>".$autor."</td></tr>
+                        <tr  class=\"warning\"><th> Fecha</th><td>".$fecha."</td></tr>";
+                        if ($imagen!=''){
+                            echo "<tr  class=\"warning\"><th> Imagen </th><td><img src=\"$imagen\" width=\"500\" height=\"200\"></img></td></tr>";
+                        }
+                        if ($video!=''){
+                            echo "<tr  class=\"warning\"><th> Video </th><td>
+                                <video width=\"500\" controls>
+                                <source src=\"".$video."\" type=\"video/mp4\">
+                                  Your browser does not support HTML5 video.
+                                </video>
+            
+                                ";
+                            }
+                        
+                    /// echo "<tr><th></th><td class=\"danger\"><a href=formulario.php?respuestas=".$respuestas.".&identificador=".$id.">RESPONDER</a></td></tr>";
+                    echo "</table>";
+            }
+
+            echo "<td><button onclick=\"location.href='index.php'\">REGRESAR</td>";
+        ?>
+    </section>
+</main>
+
 
 
 </body>

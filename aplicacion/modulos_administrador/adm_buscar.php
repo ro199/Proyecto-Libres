@@ -11,79 +11,42 @@ if (@!$_SESSION['usuario']) {
     echo "ERES ESTUDIANTE";
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Administrador</title>
+        <link rel="stylesheet" href="../../plugins/bootstrap/css/Profesor.css">
+        <link rel="stylesheet" href="../../css/fontello.css">
 
+        <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
+        <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+    </head>
 
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta charset="utf-8"></meta>
-    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
-    <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
-    <title>Proyecto SGOA</title>
-</head>
-<style>
+<body style="background-color:#00aae4;">
 
-    .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
-    }
+<header>
+       <div class="Menu-Vertical">
+          <h1>Usuario: <strong><?php echo $_SESSION['usuario'] ?></strong></h1>
+          <input type="checkbox" id="menu-bar">
+          <label class="icon-menu" for="menu-bar"></label>
+          <nav class="menu">
+               <a href="../modulos_administrador/adm_buscar.php">Gestionar Recursos</a>
+               <a href="../modulos_administrador/adm_buscar_profesores.php">Gestionar Profesores</a>
+               <a href="../modulos_administrador/adm_buscar_estudiantes.php">Gestionar Estudiantes
+               </a>
+               <a href="../modulos_administrador/adm_comentarios_todos.php">Gestionar Comentarios</a>
+               <a href="../modulos_comunes/modulo_foro/index.php">Foro</a>
+               <a href="../desconectar_sesion.php">Salir</a>
+           </nav>
+       </div>
+   </header>
+<main>
 
-
-    .row.content {height: 390px}
-
-    .sidenav {
-        padding-top: 20px;
-        background-color: #f1f1f1;
-        height: 100%;
-    }
-
-    html{
-        min-height: 100%;
-        position: relative;
-    }
-    body{
-        margin:0;
-        margin-bottom: 40px;
-    }
-    /* Set black background color, white text and some padding */
-    footer {
-        background-color: #555;
-        color: white;
-        padding: 15px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        padding-top:5px;
-    padding-bottom:5px;
-    }
-
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-        .sidenav {
-            height: auto;
-            padding: 15px;
-        }
-        .row.content {height:auto;}
-    }
-
-    .table > tbody > tr > td {
-        vertical-align: middle;
-    }
-
-        .estadistica{
-        -webkit-column-count: 3; /* Chrome, Safari, Opera */
-        -moz-column-count: 3; /* Firefox */
-        column-count: 2;
-        
-    }
-</style>
-
-<body>
-<?php include './navbar_adm_obj_apr.php';?>
 <div class="container-fluid text-center">
-    <div class="row content">
+    <section id="banner_pr">
+    <<div class="container-fluid text-center">
         <div class="col-sm-12 text-center">
             <h2> Administración de Objetos de Aprendizaje</h2>
             <form action="../modulos_administrador/adm_ejecutar_buscar.php" method="post" enctype="multipart/form-data">
@@ -218,23 +181,10 @@ if (@!$_SESSION['usuario']) {
 
         </div>
 
-        <div class="estadistica">
-        <div class="column">
-            <embed src= "../modulos_profesor/High/examples/pie-basic/index.php" height="500" width="600"></embed>    
-            </div>
-
-            <div class="column">
-            <embed src= "../modulos_profesor/High/examples/pie-basic/estadisticaDescargas.php" height="500" width="600"></embed>
-            </div>
-
-
-        </div>
-
     </div>
 </div></br></br></br>
-<footer class="label-default container-fluid text-center">
-    <p class="copyright small">Copyright &copy; Jaime Crespin, Jossué Dután, Alexis Maldonado 2018</p>
-</footer>
+</section>
+       </main>
 </body>
 
 </html>

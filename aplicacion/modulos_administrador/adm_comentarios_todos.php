@@ -7,76 +7,42 @@ if (@!$_SESSION['usuario']) {
 } elseif ($_SESSION['tipo_usuario'] == 'EST') {
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
     <head>
+        <meta charset="UTF-8">
+        <title>Administrador</title>
+        <link rel="stylesheet" href="../../plugins/bootstrap/css/Profesor.css">
+        <link rel="stylesheet" href="../../css/fontello.css">
 
-        <meta charset="utf-8"></meta>
         <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
         <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
         <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
-        <title>Proyecto SGOA</title>
     </head>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */ 
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
 
-        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {height: 390px}
+<body style="background-color:#00aae4;">
 
-        /* Set gray background color and 100% height */
-        .sidenav {
-            padding-top: 20px;
-            background-color: #f1f1f1;
-            height: 100%;
-        }
+<header>
+       <div class="Menu-Vertical">
+          <h1>Usuario: <strong><?php echo $_SESSION['usuario'] ?></strong></h1>
+          <input type="checkbox" id="menu-bar">
+          <label class="icon-menu" for="menu-bar"></label>
+          <nav class="menu">
+               <a href="../modulos_administrador/adm_buscar.php">Gestionar Recursos</a>
+               <a href="../modulos_administrador/adm_buscar_profesores.php">Gestionar Profesores</a>
+               <a href="../modulos_administrador/adm_buscar_estudiantes.php">Gestionar Estudiantes</a>
+               <a href="../modulos_administrador/adm_comentarios_todos.php">Gestionar Comentarios</a>
+               <a href="../modulos_comunes/modulo_foro/index.php">Foro</a>
+               <a href="../desconectar_sesion.php">Salir</a>
+           </nav>
+       </div>
+   </header>
+<main>
 
-        html{
-            min-height: 100%;
-            position: relative;
-        }
-        body{
-            margin:0;
-            margin-bottom: 40px;
-        }
-        /* Set black background color, white text and some padding */
-        footer {
-            background-color: #555;
-            color: white;
-            padding: 15px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
-            .sidenav {
-                height: auto;
-                padding: 15px;
-            }
-            .row.content {height:auto;} 
-        }
-
-        .table > tbody > tr > td {
-            vertical-align: middle;
-        }
-
-    </style>
-
-
-    <body>
-        <?php include './navbar_adm_comentarios.php'; ?>
-        <!-- Inicio formulario de búsqueda -->
-
-        <!-- presentacion de objetos de aprendizaje-->
-        <div class="container-fluid text-center">    
-            <div class="row content">
-                <!-- --------------------------------------------- -->
-                <div class="col-sm-12 text-center"> 
+<div class="container-fluid text-center">
+    <section id="banner_pr">
+    <<div class="container-fluid text-center">
+        <div class="col-sm-12 text-center">
                     <h2> Administración de comentarios</h2>
                     <form onsubmit="return validar_busqueda_cedula()" action="../modulos_administrador/adm_ejecutar_buscar_comentarios.php" method="post" enctype="multipart/form-data">
                         <div class="col-md-3">
@@ -86,7 +52,7 @@ if (@!$_SESSION['usuario']) {
                             <select class= "form-control" name="tipo_criterio" dir="ltr" required id="select_criterio">
                                 <option value="">Filtrar por:</option>
                                 <!--<option value="nombre">nombre</option>-->
-                               <!-- <option value="usuario">usuario</option>-->
+                                <option value="usuario">usuario</option>
                                
                                 <!--<option value="cedula">cédula</option>-->
                             </select></br>
@@ -95,7 +61,7 @@ if (@!$_SESSION['usuario']) {
                            <input type="text" class="form-control" id="criterio_busqueda" placeholder="Buscar...." name="criterio_busqueda" required></br>
                         </div>
                         <div class="col-md-3 text-left">
-                            <button id="registrar" type="submit" class="btn btn-danger">Buscar</button>
+                            <button id="registrar" type="submit" class="btn btn-success">Buscar</button>
                             </br></br>
                         </div>
                     </form>
@@ -318,9 +284,6 @@ if (@!$_SESSION['usuario']) {
             }
 
         </script>
-        <footer class="label-default container-fluid text-center">
-            <p class="copyright small">Copyright &copy; Alex Ulloa,  Miguel Alvarez, Jossué Dután, Alexis Maldonado 2018</p>
-        </footer>
     </body>
 
 </html>
