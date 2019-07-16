@@ -113,7 +113,6 @@ $identificador = 0;
         <br><br>
     </div>
         <div class="container">
-
             <table class="table table-striped table-dark" border ="1|1" class="table table-bordered" id="tabla">
                 <thead>
                     <form name="form" action="agregar.php" method="post" enctype="multipart/form-data">

@@ -111,7 +111,7 @@ if (@!$_SESSION['usuario']) {
                             <input type="text"  class="form-control" id="palabras_claves" value='<?php echo $objeto_de_aprendizaje['palabras_clave'] ?>' name="palabras_claves" required>
                         </div>
 
-                        <button id="registrar" type="submit" class="btn btn-default">Actualizar</button></br>
+                        <button id="registrar" type="submit" class="btn btn-success">Actualizar</button></br>
                     </form>
 
                 </div>

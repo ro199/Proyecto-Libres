@@ -28,51 +28,14 @@ if (@!$_SESSION['usuario']) {
     <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css"></link>
     <script type="text/javascript" src="../../plugins/bootstrap/js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
-    <title>Proyecto SGOA</title>
+    <title>Proyecto</title>
 </head>
-<style>
-
-    .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
-    }
-    .row.content {height: 390px}
-    .sidenav {
-        padding-top: 20px;
-        background-color: #f1f1f1;
-        height: 100%;
-    }
-    html{
-        min-height: 100%;
-        position: relative;
-    }
-    body{
-        margin:0;
-        margin-bottom: 40px;
-    }
-    footer {
-        background-color: #555;
-        color: white;
-        padding: 15px;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
-    @media screen and (max-width: 767px) {
-        .sidenav {
-            height: auto;
-            padding: 15px;
-        }
-        .row.content {height:auto;}
-    }
-</style>
-
-<body>
+<body style="background-color:#00aae4;">
 <?php include './navbar_adm_obj_apr.php';?>
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-4 col-sm-offset-4">
-            <h2>Objeto de aprendizaje</h2>
+            <h2>Archivo de aprendizaje</h2>
             <form id="envio"  method="post" enctype="multipart/form-data">
                 <p id="oas_existentes" style="display:none;" >
                     <?php
@@ -80,7 +43,7 @@ if (@!$_SESSION['usuario']) {
                     echo obtener_lista_de_oas();
                     ?></p>
                 <div class="form-group">
-                    <label for="file">Archivo que contine el objeto de aprendizaje:</label>
+                    <label for="file">Archivo que contine el recurso de aprendizaje:</label>
                     <p id="error1" style="display:none; color:#FF0000;">
                         Formato de archivo ínvalido! Solo se admiten archivos .zip.
                     </p>
