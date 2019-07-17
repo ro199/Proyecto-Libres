@@ -12,9 +12,10 @@ $TipoUsuario = filter_input(INPUT_POST, 'tipo_usuario');
 $usuario= generar_usuario_profesor($nombres, $apellidos);
 $contrasenia= generar_cadena_aleatoria();
 echo filter_input(INPUT_POST, 'email').$usuario.$contrasenia.filter_input(INPUT_POST, 'nombres').filter_input(INPUT_POST, 'apellidos');
+insertar_usuario($usuario, $contrasenia,$TipoUsuario, 'V', 'T');
 
 $id_usuario= recuperar_id_usuario_por_nombre($usuario);
-if(insertar_usuario($usuario, $contrasenia,$TipoUsuario, 'V', 'T')){
+if(insertar_profesor($cedula, $nombres, $apellidos, "Sistemas", "Sistemas", $email, $id_usuario)){
      enviarCorreo($email,$usuario,$contrasenia,$nombres,$apellidos);
 	 echo '<script>alert("Usuario registrado correctamente! Revise su mail para obtener las credenciales")</script> ';
 	echo "<script>location.href='../formularios_registro/Login.html'</script>";

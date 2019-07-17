@@ -121,7 +121,7 @@ if (@!$_SESSION['usuario']) {
                                     echo '<tr class="success">';
                                     echo '<td>' . $row['nombre'] . '</td>';
                                     echo '<td>' . $row['descripcion'] . '</td>';
-                                    echo '<td'.$row['direcurl'].'</td>';
+                                    echo '<td>'.$row['direcurl'].'</td>';
                                     echo '<td>' . $row['institucion'] . '</td>';
                                     echo '<td>' . $row['fechaCreacion'] . '</td>';
                                     echo '<td>'. obtener_nro_comentarios_oa($row['idobjeto_aprendizaje']) .'</td>';
